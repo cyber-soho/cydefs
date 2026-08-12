@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Defense &mdash; Day 01 Study Hub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  ::-webkit-scrollbar{width:8px}
+  ::-webkit-scrollbar-track{background:#f1f5f9}
+  ::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:4px}
+  .flip-card{background-color:transparent;width:100%;height:280px;perspective:1000px;cursor:pointer}
+  .flip-card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+  .flip-card-front,.flip-card-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:1rem;display:flex;align-items:center;justify-content:center;padding:1.5rem;text-align:center}
+  .flip-card-front{background:linear-gradient(135deg,#4f46e5,#6366f1);color:white}
+  .flip-card-back{background:#f1f5f9;color:#1e293b;transform:rotateY(180deg);border:2px solid #4f46e5;overflow-y:auto}
+  .quiz-option{transition:all .15s}
+  .quiz-option:hover{background:#eef2ff}
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed">
+
+<nav class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <span class="font-bold text-lg tracking-wide">🗂️ Cyber Defense &mdash; Day 01 Study Hub</span>
+      <div class="flex items-baseline space-x-2">
+        <button onclick="switchMode('memo')" id="nav-memo" class="px-3 py-2 rounded-md text-sm font-medium bg-slate-800 text-white transition border-b-2 border-indigo-500">Memorization</button>
+        <button onclick="switchMode('quiz')" id="nav-quiz" class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition border-b-2 border-transparent">Assessment</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8 mb-8">
+  <h1 class="text-2xl font-bold text-slate-900 mb-2">Welcome back, Defender.</h1>
+  <p class="text-slate-600 mb-4">This Study Hub covers 420-D03-AB, Day 01: Introduction to the Course and Defense Methods &mdash; from the 2026 DBIR numbers to the seven layers, control taxonomy, and SOC vocabulary.</p>
+  <div class="flex gap-6 text-sm">
+    <div class="flex items-center gap-2"><span class="text-2xl">🗂️</span><div><strong>Memorization</strong><br><span class="text-slate-500">24 Flashcards</span></div></div>
+    <div class="flex items-center gap-2"><span class="text-2xl">✅</span><div><strong>Assessment</strong><br><span class="text-slate-500">10 Practice Questions</span></div></div>
+  </div>
+</div>
+
+<!-- MEMORIZATION -->
+<section id="memo-view" class="block">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+      <h3 class="font-bold text-slate-800 mb-2">### Instructions</h3>
+      <ul class="text-sm text-slate-600 space-y-1">
+        <li>✅ Click a card to flip it; use the arrows to navigate.</li>
+        <li>✅ Master the terminology and the "What" first.</li>
+        <li>✅ Then take the Quiz to practice the "Why."</li>
+      </ul>
+    </div>
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-5">
+      <h3 class="font-bold text-amber-900 mb-2">### Quick Pro-Tip</h3>
+      <p class="text-sm text-amber-800 italic">"Unknown" is scored the same as "No" in the readiness console &mdash; from an attacker's point of view there's no difference between a control that doesn't exist and one nobody can confirm exists.</p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+    <h2 class="text-xl font-bold text-slate-900 mb-1">Knowledge Cards</h2>
+    <p class="text-slate-500 text-sm mb-4">Click the card to flip it, use the arrows to navigate.</p>
+    <div class="flip-card mb-4" id="flipcard" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-card-front"><p class="text-xl font-semibold" id="card-front"></p></div>
+        <div class="flip-card-back"><p class="text-base" id="card-back"></p></div>
+      </div>
+    </div>
+    <div class="flex items-center justify-between">
+      <button onclick="prevCard()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 rounded-md font-medium">&larr; Prev</button>
+      <span class="text-sm font-mono text-slate-500" id="card-counter">1 / 24</span>
+      <button onclick="nextCard()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 rounded-md font-medium">Next &rarr;</button>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz-view" class="hidden">
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+    <h2 class="text-xl font-bold text-slate-900 mb-1">Ready for the Assessment?</h2>
+    <p class="text-slate-500 text-sm mb-4">Test your judgment on defense concepts from Day 01.</p>
+    <div class="flex justify-between items-center mb-4 text-sm font-mono text-slate-600">
+      <span id="quiz-progress">Question 1 of 10</span>
+      <span id="quiz-score">Score: 0</span>
+    </div>
+    <div id="quiz-body"></div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-stone-900 text-stone-400 py-6 mt-8">
+  <div class="container mx-auto text-center text-sm">
+    <p style="display:flex;justify-content:center;align-items:center;gap:8px;margin:0;">
+      <img src="cybersoho.png" alt="Cyber Soho" style="height:50px;">
+      <span>Educational Hub &copy; 2026 &mdash; From the Industry to the Classroom &mdash; Building the IT's Future, Today and Together !<br>ALL Rights Reserverd<br></span>
+    </p>
+  </div>
+</footer>
+
+<script>
+const cards = [
+  ["Defence in depth","Placing multiple INDEPENDENT controls along the same attack path, so the failure of any one control does not result in compromise."],
+  ["Defensible architecture","A network design that makes defence possible: named boundaries, inspection points, known system roles, and logs that leave the machine that produced them."],
+  ["Cyber resilience","The ability to keep delivering service WHILE an attack is under way and AFTER it succeeds &mdash; tested backups, procedures, spare capacity, a named responder."],
+  ["Attack surface","The complete set of points at which an unauthorised party could attempt to enter, extract data from, or disrupt a system."],
+  ["Entry point","One specific point in the attack surface: a published service, a wireless network, a physical port, a supplier connection, a mailbox."],
+  ["Attack vector","The METHOD used at an entry point &mdash; exploitation, phishing, a stolen credential, a malicious document."],
+  ["Zone","A group of systems sharing the same trust level and access rules, separated from other zones by a control point that inspects traffic between them."],
+  ["Default deny","The last rule in every ruleset denies everything and logs it; every allowed flow is a named, justified exception."],
+  ["Preventive control","Stops the event from happening, e.g. a firewall deny rule or MFA enforcement."],
+  ["Detective control","Identifies that an event happened or is happening, e.g. an IDS signature or file-integrity monitoring."],
+  ["Compensating control","Provides equivalent protection when the intended control can't be used, e.g. a jump host in front of an unpatchable legacy system."],
+  ["CIS Controls v8.1 / IG1","153 safeguards across 18 controls; IG1 = essential cyber hygiene for organisations with no dedicated security staff."],
+  ["NIST CSF 2.0 functions","Govern, Identify, Protect, Detect, Respond, Recover &mdash; the vocabulary for organising a security programme."],
+  ["MITRE ATT&CK v19 change","Defense Evasion was retired and split into Stealth (TA0005) and Defense Impairment (TA0112)."],
+  ["Zero Trust","A design principle: being inside the network is not evidence of being authorised. Every request is verified &mdash; identity, device state, context."],
+  ["SIEM","Security Information and Event Management &mdash; collects logs from everywhere, correlates them, raises alerts."],
+  ["EDR","Endpoint Detection and Response &mdash; an agent on the host that detects behaviour and can isolate the machine."],
+  ["SOAR","Security Orchestration, Automation and Response &mdash; runs the repeatable parts of incident response automatically."],
+  ["MDR","Managed Detection and Response &mdash; a SOC you rent instead of build; how most small organisations get one."],
+  ["MTTD / MTTR","Mean Time To Detect / Mean Time To Respond (or Recover) &mdash; the two numbers a SOC is measured on."],
+  ["Active defence","Deliberate actions to detect, disrupt, delay and study an adversary INSIDE systems you own or are authorised to operate. NOT hacking back."],
+  ["Criminal Code s.342.1 (Canada)","Makes unauthorised use of a computer an offence; authorisation requires written permission, from someone with authority, for specific systems, in a specific window."],
+  ["2026 DBIR top vector","Vulnerability exploitation is now the top initial access vector at 31% of breaches, up from 20%."],
+  ["The AI rule for this course","The model drafts. The analyst decides. The analyst's name goes on the record. Run models locally (127.0.0.1); declare all AI use."]
+];
+let cardIndex = 0;
+function renderCard(){
+  document.getElementById('card-front').textContent = cards[cardIndex][0];
+  document.getElementById('card-back').innerHTML = cards[cardIndex][1];
+  document.getElementById('card-counter').textContent = (cardIndex+1) + " / " + cards.length;
+  document.getElementById('flipcard').classList.remove('flipped');
+}
+function nextCard(){ cardIndex = (cardIndex+1) % cards.length; renderCard(); }
+function prevCard(){ cardIndex = (cardIndex-1+cards.length) % cards.length; renderCard(); }
+renderCard();
+
+const quiz = [
+  {q:"A client buys the single most expensive endpoint protection product on the market and installs it everywhere. What did they actually buy?",
+   options:["Defence in depth","One control at one layer","Cyber resilience","A defensible architecture"], correct:1,
+   explain:"One product at one layer is neither depth, nor architecture, nor resilience &mdash; the most common small-business security mistake."},
+  {q:"According to the 2026 Verizon DBIR, what percentage of breaches involved a third party?",
+   options:["13%","31%","48%","62%"], correct:2, explain:"48% &mdash; a 60% increase, meaning zoning must assume a vendor connection is hostile."},
+  {q:"A database is bound to 0.0.0.0 instead of 127.0.0.1. How should this be classified?",
+   options:["LOOPBACK_ONLY, no action needed","SPECIFIC_INTERFACE, confirm the zone","ALL_INTERFACES, justify it or bind to loopback","This is not a security concern"], correct:2,
+   explain:"0.0.0.0 is a wildcard meaning every interface on the host is reachable, including the guest network."},
+  {q:"Which of these is a DETECTIVE control?",
+   options:["Firewall deny rule","MFA enforcement","File-integrity monitoring","Login warning banner"], correct:2,
+   explain:"Detective controls identify that an event happened; FIM (file-integrity monitoring) is the classic example."},
+  {q:"A legacy machine-tool controller cannot be patched. What is the correct professional response?",
+   options:["Leave it unpatched and hope","Apply a compensating control and document it","Disconnect the whole network","Ignore it since it's old"], correct:1,
+   explain:"Isolate it, add a jump host, restrict source addresses, monitor connections, and write down why &mdash; an undocumented compensating control is indistinguishable from negligence."},
+  {q:"In the 'defended' vs 'single strong' scenario from the residual-risk model, what is the key lesson?",
+   options:["One 90% control always wins","Seven ordinary layers beat one excellent layer by about 20x less residual risk","Layers should never be combined","Residual risk cannot be modeled"], correct:1,
+   explain:"31.5% (flat) vs 10% (single strong) vs 0.49% (seven layers) &mdash; depth beats even an excellent single control."},
+  {q:"What is the honesty clause required when presenting the layered-defence risk model to a client?",
+   options:["Never show the math","Name your correlated failure modes, since layers rarely fail independently","Round all numbers up","Only present the best-case scenario"], correct:1,
+   explain:"A shared credential, VLAN, or hypervisor can defeat multiple 'independent' layers at once &mdash; hiding this assumption turns analysis into a sales deck."},
+  {q:"What distinguishes 'active defence' from illegal 'hacking back'?",
+   options:["Active defence uses better tools","Active defence happens only inside systems you own or are authorised to operate","There is no legal difference","Active defence is always automated"], correct:1,
+   explain:"Your authority ends at your own boundary, defined by a contract &mdash; not by a router. Retaliating against a third-party system is a Criminal Code offence in Canada."},
+  {q:"What does MDR stand for, and what is it in practice?",
+   options:["Malware Detection Router &mdash; a network appliance","Managed Detection and Response &mdash; a SOC you rent instead of build","Multi-Domain Recovery &mdash; a backup strategy","Mandatory Defence Regulation &mdash; a compliance law"], correct:1,
+   explain:"MDR is how most small organisations get SOC-level monitoring without building one in-house."},
+  {q:"Why does the AI-assisted triage script label its output 'draft_not_verdict'?",
+   options:["It's a random variable name","To enforce the rule that the model drafts and the analyst decides, in the data structure itself","Because it's faster to type","To hide the model's involvement"], correct:1,
+   explain:"Naming is a control: the field name enforces the course's core AI policy even years later, in a different workflow."}
+];
+let currentQ = 0, score = 0, answered = [];
+function renderQuiz(){
+  const container = document.getElementById('quiz-body');
+  if(currentQ >= quiz.length){
+    container.innerHTML = `<div class="text-center py-8">
+      <div class="text-5xl mb-4">🏁</div>
+      <h3 class="text-xl font-bold text-slate-800 mb-2">Assessment complete</h3>
+      <p class="text-slate-600 mb-4">You scored ${score} out of ${quiz.length}.</p>
+      <button onclick="restartQuiz()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-semibold">Retake Quiz</button>
+    </div>`;
+    document.getElementById('quiz-progress').textContent = "Complete";
+    return;
+  }
+  const item = quiz[currentQ];
+  document.getElementById('quiz-progress').textContent = `Question ${currentQ+1} of ${quiz.length}`;
+  document.getElementById('quiz-score').textContent = `Score: ${score}`;
+  container.innerHTML = `
+    <p class="font-semibold text-slate-800 mb-4">${item.q}</p>
+    <div class="space-y-2" id="options"></div>
+    <div id="explain" class="hidden mt-4 p-3 bg-slate-100 rounded text-sm text-slate-700"></div>
+    <button id="next-btn" onclick="nextQuestion()" class="hidden mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-semibold">Next Question</button>`;
+  const optsDiv = document.getElementById('options');
+  item.options.forEach((opt,i)=>{
+    const btn = document.createElement('button');
+    btn.className = "quiz-option w-full text-left p-3 border border-slate-300 rounded-md";
+    btn.textContent = opt;
+    btn.onclick = ()=>selectAnswer(i);
+    optsDiv.appendChild(btn);
+  });
+}
+function selectAnswer(i){
+  const item = quiz[currentQ];
+  const opts = document.querySelectorAll('#options button');
+  opts.forEach((b,idx)=>{
+    b.disabled = true;
+    if(idx===item.correct) b.classList.add('bg-emerald-100','border-emerald-500');
+    else if(idx===i) b.classList.add('bg-red-100','border-red-500');
+  });
+  if(i===item.correct) score++;
+  document.getElementById('quiz-score').textContent = `Score: ${score}`;
+  const ex = document.getElementById('explain');
+  ex.textContent = item.explain;
+  ex.classList.remove('hidden');
+  document.getElementById('next-btn').classList.remove('hidden');
+}
+function nextQuestion(){ currentQ++; renderQuiz(); }
+function restartQuiz(){ currentQ=0; score=0; renderQuiz(); }
+renderQuiz();
+
+function switchMode(mode){
+  document.getElementById('memo-view').classList.toggle('hidden', mode!=='memo');
+  document.getElementById('quiz-view').classList.toggle('hidden', mode!=='quiz');
+  const memoBtn = document.getElementById('nav-memo'), quizBtn = document.getElementById('nav-quiz');
+  if(mode==='memo'){ memoBtn.classList.add('bg-slate-800','text-white','border-indigo-500'); memoBtn.classList.remove('text-slate-300','border-transparent');
+    quizBtn.classList.remove('bg-slate-800','text-white','border-indigo-500'); quizBtn.classList.add('text-slate-300','border-transparent'); }
+  else { quizBtn.classList.add('bg-slate-800','text-white','border-indigo-500'); quizBtn.classList.remove('text-slate-300','border-transparent');
+    memoBtn.classList.remove('bg-slate-800','text-white','border-indigo-500'); memoBtn.classList.add('text-slate-300','border-transparent'); }
+}
+</script>
+</body>
+</html>

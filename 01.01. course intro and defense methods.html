@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>420-D03-AB &mdash; Cyber Defense | Day 01: Introduction &amp; Defense Methods</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  ::-webkit-scrollbar{width:8px}
+  ::-webkit-scrollbar-track{background:#f1f5f9}
+  ::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:4px}
+  ::-webkit-scrollbar-thumb:hover{background:#64748b}
+  .chart-container{position:relative;width:100%;max-width:700px;margin:0 auto;height:320px;max-height:420px}
+  @media (min-width:768px){.chart-container{height:380px}}
+  .fade-in{animation:fadein .4s ease-in-out}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  .layer-card{transition:all .25s ease-in-out}
+  .layer-card:hover{transform:translateY(-3px);box-shadow:0 10px 20px -8px rgba(15,23,42,.25)}
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed selection:bg-indigo-100 selection:text-indigo-800">
+
+<nav class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🛡️</span>
+        <span class="font-bold text-lg tracking-wide">420-D03-AB <span class="text-indigo-400">Cyber Defense</span></span>
+      </div>
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-2">
+          <button onclick="switchTab('overview')" id="nav-overview" class="px-3 py-2 rounded-md text-sm font-medium bg-slate-800 text-white transition border-b-2 border-indigo-500">Overview</button>
+          <button onclick="switchTab('lesson1')" id="nav-lesson1" class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition border-b-2 border-transparent">Lesson 1</button>
+          <button onclick="switchTab('lesson2')" id="nav-lesson2" class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition border-b-2 border-transparent">Lesson 2</button>
+          <button onclick="switchTab('examples')" id="nav-examples" class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition border-b-2 border-transparent">Real-Life Examples</button>
+          <button onclick="switchTab('checkpoint')" id="nav-checkpoint" class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition border-b-2 border-transparent">Checkpoint</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+<!-- OVERVIEW -->
+<section id="overview-view" class="space-y-8 fade-in block">
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+    <h1 class="text-3xl font-bold text-slate-900 mb-2">Day 01 &mdash; Introduction to the Course &amp; Defense Methods</h1>
+    <p class="text-slate-600 mb-6 text-lg">Class 1 of 23. Two lessons, six real-life examples, one competency: <strong class="text-indigo-700">EZ03 &mdash; apply access control measures.</strong></p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="overflow-x-auto rounded-lg border border-slate-200">
+        <table class="w-full text-sm">
+          <tbody class="divide-y divide-slate-100">
+            <tr class="bg-slate-50"><td class="p-3 font-semibold text-slate-700 w-1/3">Programme</td><td class="p-3">AEC (Attestation d'études collégiales) &mdash; Cybersecurity, LEA.D8</td></tr>
+            <tr><td class="p-3 font-semibold text-slate-700">Course</td><td class="p-3">420-D03-AB &mdash; Cyber Defense &mdash; 3-3-3 &mdash; 3.00 credits</td></tr>
+            <tr class="bg-slate-50"><td class="p-3 font-semibold text-slate-700">Competency</td><td class="p-3">EZ03 &mdash; To apply access control measures</td></tr>
+            <tr><td class="p-3 font-semibold text-slate-700">Prerequisite</td><td class="p-3">420-D01-AB &mdash; Preventive Surveillance in Cybersecurity</td></tr>
+            <tr class="bg-slate-50"><td class="p-3 font-semibold text-slate-700">Class</td><td class="p-3">1 of 23 &mdash; Saturday 29 August 2026, 08:30&ndash;13:30</td></tr>
+            <tr><td class="p-3 font-semibold text-slate-700">Course window</td><td class="p-3">29 August 2026 &rarr; 24 October 2026</td></tr>
+            <tr class="bg-slate-50"><td class="p-3 font-semibold text-slate-700">Modality</td><td class="p-3">Online</td></tr>
+            <tr><td class="p-3 font-semibold text-slate-700">Cohort</td><td class="p-3">CYB-01</td></tr>
+            <tr class="bg-slate-50"><td class="p-3 font-semibold text-slate-700">Prepared by</td><td class="p-3">Cyber.SoHo Educational Hub</td></tr>
+            <tr><td class="p-3 font-semibold text-slate-700">Content current to</td><td class="p-3">11 August 2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex flex-col items-center justify-center bg-slate-50 p-4 rounded-xl border border-slate-200">
+        <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2">Where Your Grade Comes From</h3>
+        <div class="chart-container"><canvas id="gradeChart"></canvas></div>
+        <p class="text-xs text-center text-slate-400 mt-2">Labs + Final Project + Manual = 55% of the final grade, and all three are one continuous body of work.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+    <h2 class="text-2xl font-bold text-slate-900 mb-4">Session Timing Map</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+        <thead class="bg-slate-900 text-white"><tr><th class="p-3 text-left">Time</th><th class="p-3 text-left">Section</th><th class="p-3 text-left">What happens</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="p-3 font-mono text-slate-500">00:00&ndash;00:06</td><td class="p-3 font-semibold">Opening</td><td class="p-3">Who you are, what the course is, one honest promise</td></tr>
+          <tr class="bg-indigo-50"><td class="p-3 font-mono text-slate-500">00:06&ndash;00:38</td><td class="p-3 font-semibold">Lesson 1 &mdash; Introduction to the Course</td><td class="p-3">2026 threat landscape, grading, toolchain, the law</td></tr>
+          <tr><td class="p-3 font-mono text-slate-500">00:20&ndash;00:26</td><td class="p-3">Real-Life Example 01</td><td class="p-3">The Monday you inherit a network (Python)</td></tr>
+          <tr><td class="p-3 font-mono text-slate-500">00:30&ndash;00:38</td><td class="p-3">Real-Life Example 02</td><td class="p-3">The 02:14 alert nobody can read (Python + local AI)</td></tr>
+          <tr class="bg-amber-50"><td class="p-3 font-mono text-slate-500">00:38&ndash;00:43</td><td class="p-3 font-semibold">Break 1</td><td class="p-3">Five minutes</td></tr>
+          <tr class="bg-indigo-50"><td class="p-3 font-mono text-slate-500">00:43&ndash;01:52</td><td class="p-3 font-semibold">Lesson 2 &mdash; Defense Methods</td><td class="p-3">Definitions, seven layers, entry points, control taxonomy, hygiene, active defence, SOC, frameworks</td></tr>
+          <tr><td class="p-3 font-mono text-slate-500">00:56&ndash;01:04</td><td class="p-3">Real-Life Example 03</td><td class="p-3">Counting the doors before buying locks (Bash)</td></tr>
+          <tr><td class="p-3 font-mono text-slate-500">01:10&ndash;01:18</td><td class="p-3">Real-Life Example 04</td><td class="p-3">The baseline you can show a client (PowerShell)</td></tr>
+          <tr class="bg-amber-50"><td class="p-3 font-mono text-slate-500">01:18&ndash;01:23</td><td class="p-3 font-semibold">Break 2</td><td class="p-3">Five minutes</td></tr>
+          <tr><td class="p-3 font-mono text-slate-500">01:30&ndash;01:38</td><td class="p-3">Real-Life Example 05</td><td class="p-3">The readiness console (self-contained HTML)</td></tr>
+          <tr><td class="p-3 font-mono text-slate-500">01:44&ndash;01:52</td><td class="p-3">Real-Life Example 06</td><td class="p-3">Proving the second layer was worth the money (Python)</td></tr>
+          <tr><td class="p-3 font-mono text-slate-500">01:52&ndash;02:00</td><td class="p-3 font-semibold">Wrap</td><td class="p-3">Homework, Lab 01 brief, what Class 2 looks like</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 1 -->
+<section id="lesson1-view" class="space-y-8 hidden">
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+    <h2 class="text-3xl font-bold text-slate-900 mb-4">Lesson 1 &mdash; Introduction to the Course</h2>
+    <p class="text-slate-600 mb-6">The competency <strong class="text-indigo-700">EZ03</strong> &mdash; apply access control measures &mdash; breaks into four elements. Notice how often the word <em>prove</em> appears.</p>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+        <thead class="bg-slate-100"><tr><th class="p-3 text-left">Element</th><th class="p-3 text-left">In plain language</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="p-3 font-semibold">1. Apply cyberdefence techniques</td><td class="p-3">Know where the network can be entered, put controls at those points, divide the network into zones, run active defences, build in redundancy.</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">2. Control access to hosts</td><td class="p-3">Know what each machine is for, control who can log into it and with what rights, configure its own firewall, harden it, then prove the hardening worked.</td></tr>
+          <tr><td class="p-3 font-semibold">3. Control network access</td><td class="p-3">Control identities and permissions across zones, configure the network firewall, deploy detection and prevention, secure wired and wireless protocols, then prove it works.</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">4. Apply cryptography techniques</td><td class="p-3">Understand the basic concepts, implement the main cryptosystems, know how they are attacked, choose the right one for the job, protect data in transit and at rest.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-4">The 2026 Threat Picture (Verizon DBIR, 19th edition)</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
+      <div class="chart-container"><canvas id="dbirChart"></canvas></div>
+      <ul class="space-y-3 text-sm">
+        <li class="p-3 bg-red-50 rounded-lg border-l-4 border-red-500"><strong>Vulnerability exploitation</strong> is now the top initial access vector: <strong>31%</strong> of breaches, up from 20%.</li>
+        <li class="p-3 bg-slate-50 rounded-lg border-l-4 border-slate-400">The <strong>human element</strong> was involved in <strong>62%</strong> of breaches.</li>
+        <li class="p-3 bg-amber-50 rounded-lg border-l-4 border-amber-500">Breaches involving a <strong>third party</strong>: <strong>48%</strong>, a 60% increase.</li>
+        <li class="p-3 bg-purple-50 rounded-lg border-l-4 border-purple-500"><strong>System Intrusion</strong> is the top breach pattern since 2022: <strong>60%</strong>.</li>
+        <li class="p-3 bg-slate-50 rounded-lg border-l-4 border-slate-400">Median time to patch rose from 32 to <strong>43 days</strong>.</li>
+        <li class="p-3 bg-emerald-50 rounded-lg border-l-4 border-emerald-500">Median ransomware payment <strong>$139,875</strong> &mdash; <strong>69%</strong> of victims refused to pay.</li>
+        <li class="p-3 bg-indigo-50 rounded-lg border-l-4 border-indigo-500">Unapproved &ldquo;shadow AI&rdquo; use by employees tripled to <strong>45%</strong>.</li>
+      </ul>
+    </div>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-4">Evaluation Structure</h3>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+        <thead class="bg-slate-900 text-white"><tr><th class="p-3 text-left">Evaluation</th><th class="p-3 text-left">Weight</th><th class="p-3 text-left">When</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr class="bg-indigo-50"><td class="p-3 font-semibold">Hands-on labs (6 &times; 5%)</td><td class="p-3 font-bold text-indigo-700">30%</td><td class="p-3">Classes 2, 4, 6, 8, 11, 14/16</td></tr>
+          <tr><td class="p-3">Quizzes (4 &times; 2.5%)</td><td class="p-3 font-bold">10%</td><td class="p-3">Classes 2, 9, 14, 18</td></tr>
+          <tr class="bg-slate-50"><td class="p-3">Mid-Term Exam</td><td class="p-3 font-bold">10%</td><td class="p-3">Class 10 (22 September)</td></tr>
+          <tr class="bg-indigo-50"><td class="p-3 font-semibold">Final Project</td><td class="p-3 font-bold text-indigo-700">15%</td><td class="p-3">Class 16 (7 October)</td></tr>
+          <tr class="bg-indigo-50"><td class="p-3 font-semibold">Course Procedure Manual</td><td class="p-3 font-bold text-indigo-700">10%</td><td class="p-3">Class 16</td></tr>
+          <tr><td class="p-3">Final Exam</td><td class="p-3 font-bold">25%</td><td class="p-3">Class 23 (24 October)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-slate-600 text-sm mb-8">The six labs, the Final Project, and the Course Procedure Manual are not three separate assignments &mdash; they are one body of work, graded three times. <strong>Write the lab up the same evening you do it.</strong></p>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-4">The AI Rule for This Course</h3>
+    <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-6 mb-4">
+      <p class="text-indigo-900 font-bold text-lg mb-2">The model drafts. The analyst decides. The analyst's name goes on the record.</p>
+      <ul class="list-disc list-inside text-indigo-800 text-sm space-y-1">
+        <li><strong>Run it locally</strong> &mdash; Ollama at 127.0.0.1, never a hosted chatbot with sensitive logs.</li>
+        <li><strong>Treat every output as a draft</strong> &mdash; a fluent summary can still be partly invented.</li>
+        <li><strong>Declare it</strong> &mdash; undeclared AI-written text is an academic-integrity matter; declared and verified use is encouraged.</li>
+      </ul>
+    </div>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-4">The Line You Do Not Cross</h3>
+    <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+      <p class="text-red-900 text-sm">In Canada, unauthorised use of a computer is an offence under <strong>section 342.1 of the Criminal Code</strong>. Mischief in relation to computer data is section 430(1.1). You test your own lab environment. Never the College network. Never an employer's network without a signed scope. <strong>Authorisation means written permission, from someone with the authority to grant it, covering the specific systems, during a specific window.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 2 -->
+<section id="lesson2-view" class="space-y-8 hidden">
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+    <h2 class="text-3xl font-bold text-slate-900 mb-4">Lesson 2 &mdash; Defense Methods</h2>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-3">2.1 &mdash; Three Definitions, Stated Precisely</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500"><strong class="block text-blue-900">Defence in depth</strong><span class="text-blue-800 text-sm">Multiple independent controls along the same attack path, so one failure doesn't mean compromise.</span></div>
+      <div class="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500"><strong class="block text-purple-900">Defensible architecture</strong><span class="text-purple-800 text-sm">A network design that makes defence possible: named boundaries, inspection points, known system roles, and logs.</span></div>
+      <div class="p-4 bg-emerald-50 rounded-lg border-l-4 border-emerald-500"><strong class="block text-emerald-900">Cyber resilience</strong><span class="text-emerald-800 text-sm">Keeping the business running while an attack is underway and after it succeeds &mdash; tested backups, procedures, spare capacity.</span></div>
+    </div>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-3">2.2 &mdash; The Seven Layers</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="layer-card p-4 bg-white border border-slate-200 rounded-lg"><span class="text-xs font-bold text-slate-400">LAYER 1</span><h4 class="font-bold text-slate-800">Governance &amp; People</h4><p class="text-xs text-slate-500 mt-1">Policies, awareness, joiner-mover-leaver process</p></div>
+      <div class="layer-card p-4 bg-white border border-slate-200 rounded-lg"><span class="text-xs font-bold text-slate-400">LAYER 2</span><h4 class="font-bold text-slate-800">Physical</h4><p class="text-xs text-slate-500 mt-1">Locked racks, badge access, secure disposal</p></div>
+      <div class="layer-card p-4 bg-white border border-slate-200 rounded-lg"><span class="text-xs font-bold text-slate-400">LAYER 3</span><h4 class="font-bold text-slate-800">Perimeter</h4><p class="text-xs text-slate-500 mt-1">Edge firewall, published-service list, VPN gateway</p></div>
+      <div class="layer-card p-4 bg-white border border-slate-200 rounded-lg"><span class="text-xs font-bold text-slate-400">LAYER 4</span><h4 class="font-bold text-slate-800">Network</h4><p class="text-xs text-slate-500 mt-1">VLAN zoning, IDS/IPS, DNS filtering, wireless separation</p></div>
+      <div class="layer-card p-4 bg-white border border-slate-200 rounded-lg"><span class="text-xs font-bold text-slate-400">LAYER 5</span><h4 class="font-bold text-slate-800">Host</h4><p class="text-xs text-slate-500 mt-1">Host firewall, endpoint protection, patching, hardening</p></div>
+      <div class="layer-card p-4 bg-white border border-slate-200 rounded-lg"><span class="text-xs font-bold text-slate-400">LAYER 6</span><h4 class="font-bold text-slate-800">Application &amp; Identity</h4><p class="text-xs text-slate-500 mt-1">Least privilege, MFA, service-account hygiene</p></div>
+      <div class="layer-card p-4 bg-white border border-slate-200 rounded-lg"><span class="text-xs font-bold text-slate-400">LAYER 7</span><h4 class="font-bold text-slate-800">Data &amp; Recovery</h4><p class="text-xs text-slate-500 mt-1">Encryption, offline backup, tested restore</p></div>
+      <div class="layer-card p-4 bg-indigo-600 text-white rounded-lg flex items-center justify-center text-center"><p class="text-sm font-semibold">An attacker must defeat every layer in sequence; you only need one layer to hold.</p></div>
+    </div>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-3">2.3 &mdash; Finding the Doors: Attack Surface &amp; Entry Points</h3>
+    <p class="text-slate-600 text-sm mb-3"><strong>Attack surface</strong>: the complete set of points where an unauthorised party could enter, extract data, or disrupt a system. <strong>Entry point</strong>: one specific such point. <strong>Attack vector</strong>: the method used at an entry point.</p>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+        <thead class="bg-slate-100"><tr><th class="p-3 text-left">Category</th><th class="p-3 text-left">Examples</th><th class="p-3 text-left">Why it gets missed</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="p-3 font-semibold">Deliberate &amp; known</td><td class="p-3">VPN gateway, web server, mail flow</td><td class="p-3">Rarely reviewed after the day they were built</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">Deliberate &amp; forgotten</td><td class="p-3">Old firewall rule; vendor's remote-support tool</td><td class="p-3">Nobody removed it because nobody owned it</td></tr>
+          <tr><td class="p-3 font-semibold">Accidental</td><td class="p-3">Service bound to 0.0.0.0; public test system</td><td class="p-3">Default configuration, never audited</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">Not recognised as computers</td><td class="p-3">Printers, cameras, smart TVs, badge readers</td><td class="p-3">Nobody thinks of them as attack surface</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-3">2.4 &mdash; Zoning a Flat Network</h3>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+        <thead class="bg-slate-100"><tr><th class="p-3 text-left">Zone</th><th class="p-3 text-left">Contains</th><th class="p-3 text-left">Rule of thumb</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="p-3 font-semibold">Perimeter / edge</td><td class="p-3">Firewall, VPN termination</td><td class="p-3">Nothing else lives here</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">Servers</td><td class="p-3">File server, domain controller, backup target</td><td class="p-3">Accepts from Users. Initiates almost nothing outbound</td></tr>
+          <tr><td class="p-3 font-semibold">Users</td><td class="p-3">Staff workstations/laptops</td><td class="p-3">Reaches Servers on named ports only</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">Unmanaged / IoT</td><td class="p-3">Printers, cameras, TV, controllers</td><td class="p-3">Reaches nothing internal</td></tr>
+          <tr><td class="p-3 font-semibold">Guest</td><td class="p-3">Client &amp; visitor devices</td><td class="p-3">Internet only, full isolation</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">Management</td><td class="p-3">Switch/firewall/hypervisor admin interfaces</td><td class="p-3">Reachable only from a named admin workstation</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-3">2.5 &mdash; Control Taxonomy: Five Functions &times; Three Types</h3>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+        <thead class="bg-slate-100"><tr><th class="p-3 text-left">Function</th><th class="p-3 text-left">What it does</th><th class="p-3 text-left">Example</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="p-3 font-semibold">Preventive</td><td class="p-3">Stops the event from happening</td><td class="p-3">Firewall deny rule; MFA enforcement</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">Detective</td><td class="p-3">Identifies the event happened</td><td class="p-3">IDS signature; file-integrity monitoring</td></tr>
+          <tr><td class="p-3 font-semibold">Corrective</td><td class="p-3">Limits damage, restores service</td><td class="p-3">Automatic host isolation; restore from backup</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">Deterrent</td><td class="p-3">Reduces the likelihood of an attempt</td><td class="p-3">Login warning banner; visible camera</td></tr>
+          <tr><td class="p-3 font-semibold">Compensating</td><td class="p-3">Equivalent protection when the ideal control can't be used</td><td class="p-3">Jump host for an unpatchable legacy system</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-3">2.6 &mdash; Essential Cyber Hygiene &amp; Frameworks</h3>
+    <p class="text-slate-600 text-sm mb-3"><strong>CIS Controls v8.1 IG1</strong> defines essential cyber hygiene. Priority order: 1) Know what you have &middot; 2) Control administrators &middot; 3) Configure securely &middot; 4) Patch on schedule &middot; 5) Collect logs off-host &middot; 6) Protect the boundary/segment &middot; 7) Back up and test restore &middot; 8) Train the people.</p>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+        <thead class="bg-slate-900 text-white"><tr><th class="p-3 text-left">Framework</th><th class="p-3 text-left">Published by</th><th class="p-3 text-left">What it is for</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="p-3 font-semibold">NIST CSF 2.0</td><td class="p-3">NIST</td><td class="p-3">Govern, Identify, Protect, Detect, Respond, Recover</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">CIS Controls v8.1</td><td class="p-3">Center for Internet Security</td><td class="p-3">What to do first, prioritised safeguards</td></tr>
+          <tr><td class="p-3 font-semibold">MITRE ATT&amp;CK v19</td><td class="p-3">MITRE Corporation</td><td class="p-3">How adversaries actually behave &mdash; shared vocabulary</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">Baseline Controls for SMOs</td><td class="p-3">Canadian Centre for Cyber Security</td><td class="p-3">Canadian guidance for small/medium orgs</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-slate-600 text-sm mb-8 italic">NIST CSF tells you how to organise, CIS tells you what to do first, and ATT&amp;CK tells you what you are defending against.</p>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-3">2.7 &mdash; Active Defence (and What It Is Not)</h3>
+    <p class="text-slate-600 text-sm mb-4">Active defence means detecting, disrupting, delaying and studying an adversary <strong>inside systems you own or are authorised to operate</strong> &mdash; IPS, automated isolation, canary tokens, rate limiting, adversary emulation. <strong class="text-red-700">It is NOT "hacking back."</strong> Your authority ends at your own boundary, and your boundary is defined by a contract, not by a router.</p>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-3">2.8 &mdash; The Security Operations Centre (SOC)</h3>
+    <div class="overflow-x-auto mb-8">
+      <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+        <thead class="bg-slate-100"><tr><th class="p-3 text-left">Term</th><th class="p-3 text-left">Expansion</th><th class="p-3 text-left">What it does</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr><td class="p-3 font-semibold">SIEM</td><td class="p-3">Security Information and Event Management</td><td class="p-3">Collects logs, correlates, raises alerts</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">EDR</td><td class="p-3">Endpoint Detection and Response</td><td class="p-3">Agent detects behaviour, can isolate host</td></tr>
+          <tr><td class="p-3 font-semibold">NDR</td><td class="p-3">Network Detection and Response</td><td class="p-3">Same idea, applied to network traffic</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">XDR</td><td class="p-3">Extended Detection and Response</td><td class="p-3">Combines detection sources under one console</td></tr>
+          <tr><td class="p-3 font-semibold">SOAR</td><td class="p-3">Security Orchestration, Automation and Response</td><td class="p-3">Automates repeatable response steps</td></tr>
+          <tr class="bg-slate-50"><td class="p-3 font-semibold">MDR</td><td class="p-3">Managed Detection and Response</td><td class="p-3">A SOC you rent instead of build</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-slate-600 text-sm mb-8"><strong>MTTD</strong> (Mean Time To Detect) and <strong>MTTR</strong> (Mean Time To Respond/Recover) are the two numbers a SOC is measured on.</p>
+
+    <h3 class="text-xl font-semibold text-slate-800 mb-3">2.9 &mdash; Measuring Depth: Why the Second Layer Beats the Best Layer</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div class="chart-container"><canvas id="residualChart"></canvas></div>
+      <div>
+        <p class="text-slate-600 text-sm mb-3">Residual risk = the product of each layer's chance of failing. A single excellent control (90%) still leaves far more residual risk than seven ordinary, cheap layers combined.</p>
+        <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+          <thead class="bg-slate-100"><tr><th class="p-3 text-left">Scenario</th><th class="p-3 text-left">Residual risk</th></tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr><td class="p-3">Flat (basic firewall + AV)</td><td class="p-3 font-bold text-red-600">31.50%</td></tr>
+            <tr class="bg-slate-50"><td class="p-3">Single strong (90% NGFW alone)</td><td class="p-3 font-bold text-amber-600">10.00%</td></tr>
+            <tr><td class="p-3">Defended (7 ordinary layers)</td><td class="p-3 font-bold text-emerald-600">0.49%</td></tr>
+          </tbody>
+        </table>
+        <p class="text-slate-500 text-xs mt-3 italic">Assumes independent layer failure &mdash; always name your correlated failure modes (e.g. one stolen domain-admin credential can defeat four layers at once).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL LIFE EXAMPLES -->
+<section id="examples-view" class="space-y-6 hidden">
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+    <h2 class="text-3xl font-bold text-slate-900 mb-2">Six Real-Life Examples</h2>
+    <p class="text-slate-600 mb-6">Each anchors a lecture point in a runnable artefact. Click a card to expand the situation, the language chosen, and the teaching point.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="examples-grid"></div>
+  </div>
+</section>
+
+<!-- CHECKPOINT -->
+<section id="checkpoint-view" class="space-y-6 hidden">
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+    <h2 class="text-3xl font-bold text-slate-900 mb-4">Checkpoint &mdash; End of Lesson 1</h2>
+    <ol class="list-decimal list-inside space-y-3 text-slate-700 text-sm">
+      <li>What single competency does this course cover, and what are its four elements?</li>
+      <li>What percentage of your grade comes from the labs, Final Project and Manual combined? <span class="text-indigo-600 font-semibold">(55%)</span></li>
+      <li>According to the 2026 DBIR, what is now the top initial access vector, and at what percentage? <span class="text-indigo-600 font-semibold">(Vulnerability exploitation, 31%)</span></li>
+      <li>State the AI rule for this course in one sentence. <span class="text-indigo-600 font-semibold">(The model drafts, the analyst decides, the analyst's name goes on the record.)</span></li>
+      <li>What makes an activity authorised rather than criminal? <span class="text-indigo-600 font-semibold">(Written permission, from someone with authority, for specific systems, in a specific window.)</span></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-stone-900 text-stone-400 py-6 mt-8">
+  <div class="container mx-auto text-center text-sm">
+    <p style="display:flex;justify-content:center;align-items:center;gap:8px;margin:0;">
+      <img src="cybersoho.png" alt="Cyber Soho" style="height:50px;">
+      <span>Educational Hub &copy; 2026 &mdash; From the Industry to the Classroom &mdash; Building the IT's Future, Today and Together !<br>ALL Rights Reserverd<br></span>
+    </p>
+  </div>
+</footer>
+
+<script>
+const examples = [
+  {n:"01", title:"The Monday You Inherit a Network", lang:"Python", situation:"A new MSP technician takes over a 14-person accounting firm with zero documentation. She scaffolds a Course-Procedure-Manual-style folder tree, a cover page, and a CSV evidence register before touching anything.", point:"Documentation is a defensive control, not overhead."},
+  {n:"02", title:"The 02:14 Alert Nobody Can Read", lang:"Python + local AI", situation:"A junior SOC analyst redacts emails, phone numbers, secrets and hashes from a raw alert, then asks a locally-running Ollama model for a plain-English draft summary. The record can't be closed without a human name in it.", point:"The model drafts. The analyst decides. Run it on 127.0.0.1 only."},
+  {n:"03", title:"Counting the Doors Before Buying Locks", lang:"Bash", situation:"A junior technician inventories every listening TCP/UDP socket on a Linux file server he's authorised to administer, classifies exposure (ALL_INTERFACES vs LOOPBACK_ONLY), and checks the host firewall state.", point:"You cannot defend a door you never counted (EZ03 1.1)."},
+  {n:"04", title:"The Baseline You Can Show a Client", lang:"PowerShell", situation:"A consultant runs a read-only 10-point Windows hardening check (firewall profiles, SMBv1, patch age, BitLocker...) to produce a scored baseline &mdash; 11 of 20 &mdash; before quoting any work.", point:"Measure first, agree the change, then change. Never modify on a first visit."},
+  {n:"05", title:"The Readiness Console", lang:"Self-contained HTML", situation:"A community organisation completes a 14-question scored self-assessment on one offline HTML page. Score: 39%. The four zero-scoring rows, in priority order, become the deliverable &mdash; not the number itself.", point:"The most secure architecture is often the one with the fewest moving parts."},
+  {n:"06", title:"Proving the Second Layer Was Worth the Money", lang:"Python", situation:"A dental clinic already owns one excellent firewall (90%). The consultant models residual risk live, drops the tested-backup layer to zero, and the client buys backup testing instead of an appliance upgrade.", point:"Defence in depth beats a single strong control &mdash; and the arithmetic proves it."}
+];
+const grid = document.getElementById('examples-grid');
+examples.forEach(ex=>{
+  const div = document.createElement('div');
+  div.className = "border border-slate-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow";
+  div.innerHTML = `
+    <div class="bg-indigo-50 p-4 border-b border-indigo-100 flex justify-between items-center cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden')">
+      <div><span class="text-xs font-bold text-indigo-500">EXAMPLE ${ex.n}</span><h3 class="font-bold text-indigo-900">${ex.title}</h3></div>
+      <span class="text-xs bg-indigo-200 px-2 py-1 rounded text-indigo-800">${ex.lang}</span>
+    </div>
+    <div class="p-4 hidden">
+      <p class="text-slate-600 text-sm mb-3">${ex.situation}</p>
+      <p class="text-sm font-semibold text-emerald-700 bg-emerald-50 p-2 rounded">${ex.point}</p>
+    </div>`;
+  grid.appendChild(div);
+});
+
+function switchTab(tabId){
+  ['overview','lesson1','lesson2','examples','checkpoint'].forEach(id=>{
+    document.getElementById(id+'-view').classList.add('hidden');
+  });
+  document.getElementById(tabId+'-view').classList.remove('hidden');
+  document.getElementById(tabId+'-view').classList.add('fade-in');
+  ['overview','lesson1','lesson2','examples','checkpoint'].forEach(id=>{
+    const btn = document.getElementById('nav-'+id);
+    if(id===tabId){ btn.classList.add('bg-slate-800','text-white','border-indigo-500'); btn.classList.remove('text-slate-300','border-transparent'); }
+    else { btn.classList.remove('bg-slate-800','text-white','border-indigo-500'); btn.classList.add('text-slate-300','border-transparent'); }
+  });
+  if(tabId==='overview' && !window.gradeChart) initGradeChart();
+  if(tabId==='lesson1' && !window.dbirChart) initDbirChart();
+  if(tabId==='lesson2' && !window.residualChart) initResidualChart();
+}
+
+function initGradeChart(){
+  const ctx = document.getElementById('gradeChart').getContext('2d');
+  window.gradeChart = new Chart(ctx, {
+    type:'doughnut',
+    data:{ labels:['Labs (30%)','Final Project (15%)','Procedure Manual (10%)','Quizzes (10%)','Mid-Term (10%)','Final Exam (25%)'],
+      datasets:[{data:[30,15,10,10,10,25], backgroundColor:['#4f46e5','#6366f1','#818cf8','#94a3b8','#cbd5e1','#1e293b'], borderWidth:0, hoverOffset:10}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{boxWidth:12,font:{size:10}}}}}
+  });
+}
+function initDbirChart(){
+  const ctx = document.getElementById('dbirChart').getContext('2d');
+  window.dbirChart = new Chart(ctx, {
+    type:'bar',
+    data:{ labels:['Vuln. exploitation','Human element','Third-party involved','System Intrusion','Shadow AI use'],
+      datasets:[{label:'% of breaches / employees', data:[31,62,48,60,45], backgroundColor:'#4f46e5'}]},
+    options:{responsive:true, maintainAspectRatio:false, indexAxis:'y', plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true,max:100}}}
+  });
+}
+function initResidualChart(){
+  const ctx = document.getElementById('residualChart').getContext('2d');
+  window.residualChart = new Chart(ctx, {
+    type:'bar',
+    data:{ labels:['Flat','Single strong','Defended (7 layers)'],
+      datasets:[{label:'Residual risk %', data:[31.5,10.0,0.49], backgroundColor:['#dc2626','#d97706','#059669']}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+  });
+}
+initGradeChart();
+</script>
+</body>
+</html>

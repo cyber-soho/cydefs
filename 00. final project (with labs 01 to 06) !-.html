@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>420-D03-AB · Final Project &amp; Course Procedure Manual — Dashboard</title>
+<style>
+:root{
+  --paper:#FAF7F2; --paper2:#F3EDE2; --ink:#1F2A2A; --teal:#0E7C7B; --rust:#B5440C;
+  --ink60:rgba(31,42,42,.64); --ink35:rgba(31,42,42,.35); --line:rgba(31,42,42,.16);
+  --teal08:rgba(14,124,123,.08); --teal16:rgba(14,124,123,.16); --rust08:rgba(181,68,12,.08);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --nav-h:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;
+  border-top:4px solid var(--rust)}
+img,svg{max-width:100%;height:auto;display:block}
+a{color:var(--teal)}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:50;background:var(--paper);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:18px;padding:0 18px}
+.brand{font-family:var(--serif);font-size:1.15rem;font-weight:700;letter-spacing:.01em;white-space:nowrap}
+.brand em{font-style:normal;color:var(--teal)}
+.brand small{display:block;font-family:var(--sans);font-size:.58rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink60)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink60);padding:8px 10px;border-radius:6px;white-space:nowrap}
+.nav-links a:hover{color:var(--teal);background:var(--teal08)}
+
+/* ---------- layout ---------- */
+main{max-width:1020px;margin:0 auto;padding:calc(var(--nav-h) + 26px) 20px 40px}
+section{margin:0 0 14px;scroll-margin-top:calc(var(--nav-h) + 10px)}
+.sec-head{position:sticky;top:var(--nav-h);z-index:20;background:var(--paper);
+  display:flex;align-items:baseline;gap:12px;padding:14px 0 10px;border-bottom:2px solid var(--ink)}
+.sec-no{font-family:var(--serif);font-size:1.5rem;color:var(--rust);line-height:1}
+.sec-head h2{font-family:var(--serif);font-size:clamp(1.15rem,3.4vw,1.5rem);font-weight:700;flex:1;line-height:1.15}
+.fold{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink60);
+  border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--paper)}
+.fold:hover{color:var(--teal);border-color:var(--teal)}
+.sec-body{overflow:clip;max-height:5000px;transition:max-height .45s ease;padding:18px 0 14px}
+section.folded .sec-body{max-height:0;padding:0}
+.lede{color:var(--ink60);max-width:64ch;margin-bottom:16px}
+.small{font-size:.82rem;color:var(--ink60)}
+.mono{font-family:var(--mono)}
+
+/* ---------- hero ---------- */
+header.hero{padding:6px 0 26px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.hero h1{font-family:var(--serif);font-size:clamp(1.8rem,5.6vw,3rem);line-height:1.08;font-weight:700;max-width:18ch}
+.hero h1 .rust{color:var(--rust)}
+.hero p{margin-top:14px;max-width:62ch;color:var(--ink60)}
+.weights{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px}
+.wchip{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#fff;min-width:118px}
+.wchip b{font-family:var(--serif);font-size:1.4rem;display:block;line-height:1}
+.wchip span{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink60)}
+.wchip.teal{border-color:var(--teal);background:var(--teal08)} .wchip.teal b{color:var(--teal)}
+.wchip.rust{border-color:var(--rust);background:var(--rust08)} .wchip.rust b{color:var(--rust)}
+.wplus{font-family:var(--serif);font-size:1.3rem;color:var(--ink35)}
+.wsum{font-family:var(--serif);font-size:1.15rem}
+.wsum b{color:var(--rust)}
+.countdown{margin-top:22px;border:1px solid var(--line);border-left:5px solid var(--rust);border-radius:10px;
+  background:#fff;padding:14px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px}
+.countdown .cd-label{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink60)}
+.cd-digits{display:flex;gap:14px;font-family:var(--mono)}
+.cd-digits div{text-align:center}
+.cd-digits b{font-size:clamp(1.5rem,5vw,2.1rem);font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.cd-digits span{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink60)}
+.cd-when{font-family:var(--mono);font-size:.8rem;color:var(--ink60)}
+
+/* ---------- stones (signature) ---------- */
+.path{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap}
+.stone{flex:1 1 96px;min-width:96px;border:1px solid var(--line);border-bottom:4px solid var(--line);
+  border-radius:12px;background:#fff;padding:12px 8px 10px;text-align:center;
+  transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.stone:hover{transform:translateY(-3px);border-color:var(--teal)}
+.stone b{font-family:var(--serif);font-size:1.55rem;display:block;line-height:1;color:var(--ink)}
+.stone span{font-size:.68rem;font-weight:600;letter-spacing:.03em;color:var(--ink60);display:block;margin-top:6px;line-height:1.3}
+.stone small{display:block;font-family:var(--mono);font-size:.6rem;color:var(--ink35);margin-top:6px}
+.stone.active{border-color:var(--teal);border-bottom-color:var(--teal);background:var(--teal08)}
+.stone.active b{color:var(--teal)}
+.path-arrow{align-self:center;font-family:var(--serif);font-size:1.6rem;color:var(--rust);padding:0 2px}
+.fp-tile{flex:1.3 1 150px;min-width:140px;border-radius:12px;background:var(--teal);color:var(--paper);
+  padding:14px 12px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.fp-tile b{font-family:var(--serif);font-size:1rem;line-height:1.2}
+.fp-tile span{font-size:.72rem;opacity:.85;margin-top:5px}
+.cpm-strip{margin-top:12px;border:1px dashed var(--rust);border-radius:12px;background:var(--rust08);
+  padding:12px 16px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.cpm-strip b{font-family:var(--serif);color:var(--rust)}
+.cpm-strip span{font-size:.85rem;color:var(--ink60)}
+.lab-detail{margin-top:16px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:18px 20px}
+.lab-detail h3{font-family:var(--serif);font-size:1.15rem}
+.lab-detail .meta{font-family:var(--mono);font-size:.76rem;color:var(--ink60);margin:6px 0 12px}
+.lab-detail p{font-size:.92rem;margin-bottom:8px}
+.lab-detail p b{color:var(--teal)}
+.carry{border-left:4px solid var(--rust);background:var(--rust08);padding:9px 12px;border-radius:0 8px 8px 0;
+  font-size:.9rem;margin-top:10px}
+.carry b{color:var(--rust)}
+.tool-chips{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.tool-chips i{font-style:normal;font-family:var(--mono);font-size:.7rem;border:1px solid var(--line);
+  border-radius:999px;padding:3px 10px;background:var(--paper)}
+.four{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.four div{border:1px solid var(--line);border-top:3px solid var(--teal);border-radius:10px;background:#fff;padding:10px 12px}
+.four b{font-family:var(--serif);font-size:.95rem;display:block}
+.four span{font-size:.78rem;color:var(--ink60)}
+.four-cap{margin-top:10px;font-family:var(--serif);font-size:.95rem}
+.four-cap b{color:var(--rust)}
+
+/* ---------- estate ---------- */
+.map-wrap{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px}
+.map-cap{margin-top:10px;font-size:.8rem;color:var(--ink60)}
+
+/* ---------- calendar ---------- */
+.due-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:6px}
+.due-strip div{border:1px solid var(--line);border-radius:8px;background:#fff;padding:8px 10px;
+  font-family:var(--mono);font-size:.74rem;text-align:center}
+.due-strip b{color:var(--teal)}
+.due-note{font-size:.8rem;color:var(--ink60);margin-bottom:22px}
+.due-note b{color:var(--rust)}
+.tl{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding-top:6px}
+.tl::before{content:"";position:absolute;top:12px;left:3%;right:3%;height:2px;background:var(--line)}
+.tl-item{position:relative;text-align:center;padding-top:26px}
+.tl-item::before{content:"";position:absolute;top:5px;left:50%;transform:translateX(-50%);
+  width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--teal)}
+.tl-item.big::before{background:var(--rust);border-color:var(--rust);width:18px;height:18px;top:3px}
+.tl-item .d{font-family:var(--mono);font-size:.72rem;color:var(--ink60)}
+.tl-item .m{font-family:var(--serif);font-weight:700;font-size:.92rem;margin:2px 0}
+.tl-item.big .m{color:var(--rust)}
+.tl-item .t{font-size:.74rem;color:var(--ink60);line-height:1.35}
+@media (max-width:720px){
+  .tl{grid-template-columns:1fr;gap:16px;padding-left:26px;padding-top:0}
+  .tl::before{top:6px;bottom:6px;left:6px;right:auto;width:2px;height:auto}
+  .tl-item{text-align:left;padding-top:0}
+  .tl-item::before{left:-26px;top:4px;transform:none}
+  .tl-item.big::before{left:-28px}
+}
+
+/* ---------- manual ---------- */
+.quote{border-left:5px solid var(--teal);background:var(--teal08);border-radius:0 10px 10px 0;
+  padding:14px 18px;font-family:var(--serif);font-size:1.02rem;margin-bottom:18px}
+.quote b{color:var(--teal)}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:20px}
+.part{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px 16px}
+.part h3{font-family:var(--serif);font-size:1rem;margin-bottom:2px}
+.part h3 b{color:var(--teal);margin-right:6px}
+.part .when{font-family:var(--mono);font-size:.68rem;color:var(--rust);margin-bottom:8px;display:block}
+.part ul{list-style:none;font-size:.82rem;color:var(--ink60)}
+.part li{padding:3px 0 3px 14px;position:relative}
+.part li::before{content:"·";position:absolute;left:2px;color:var(--teal);font-weight:700}
+.rail{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.rail div{border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 13px;font-size:.8rem;font-weight:600}
+.rail div b{font-family:var(--serif);color:var(--teal);margin-right:5px}
+.rail div.rb{border-color:var(--rust);background:var(--rust08)}
+.rail div.rb b{color:var(--rust)}
+.rail span.sep{color:var(--ink35)}
+.diary{border-left:5px solid var(--rust);background:var(--rust08);border-radius:0 10px 10px 0;
+  padding:12px 16px;font-size:.9rem;margin-bottom:16px}
+.diary b{font-family:var(--serif);color:var(--rust)}
+.evi{border:1px dashed var(--line);border-radius:10px;padding:12px 14px;background:var(--paper2)}
+.evi code{font-family:var(--mono);font-size:.78rem;color:var(--teal);word-break:break-all}
+.evi p{font-size:.8rem;color:var(--ink60);margin-top:6px}
+
+/* ---------- marks ---------- */
+.bars-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.bars h3{font-family:var(--serif);font-size:1rem;margin-bottom:10px}
+.bars h3 b{color:var(--rust)}
+.bar{display:grid;grid-template-columns:1fr 44px;gap:8px;align-items:center;margin-bottom:8px}
+.bar .lbl{font-size:.78rem;line-height:1.25}
+.bar .track{grid-column:1/2;height:9px;border-radius:99px;background:var(--paper2);overflow:clip;margin-top:3px}
+.bar .fill{height:100%;border-radius:99px;background:var(--teal)}
+.bar.rustbar .fill{background:var(--rust)}
+.bar .val{grid-row:1/3;font-family:var(--mono);font-size:.74rem;text-align:right;color:var(--ink60)}
+.marks-cap{margin-top:14px;font-family:var(--serif);font-size:.95rem;border-top:1px solid var(--line);padding-top:12px}
+.marks-cap b{color:var(--rust)}
+
+/* ---------- submit ---------- */
+.ship{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:start}
+@media (max-width:680px){.ship{grid-template-columns:1fr}}
+.zipline{font-family:var(--mono);font-size:.8rem;background:var(--ink);color:var(--paper);
+  border-radius:8px;padding:10px 14px;margin-bottom:6px;word-break:break-all}
+.zipline b{color:#7FD4D3}
+.ship-when{font-size:.82rem;color:var(--ink60);margin-bottom:14px}
+.ship-when b{color:var(--rust)}
+.checks{display:flex;flex-direction:column;gap:8px}
+.chk{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:10px;
+  background:#fff;padding:10px 12px;text-align:left;width:100%;transition:border-color .15s,background .15s}
+.chk .box{flex:0 0 20px;height:20px;border:2px solid var(--ink35);border-radius:6px;margin-top:1px;
+  display:grid;place-items:center;font-size:.75rem;color:#fff}
+.chk span{font-size:.86rem}
+.chk span b{font-weight:700}
+.chk.done{border-color:var(--teal);background:var(--teal08)}
+.chk.done .box{background:var(--teal);border-color:var(--teal)}
+.ring-card{text-align:center;border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px 22px}
+.ring-card svg{margin:0 auto}
+.ring-num{font-family:var(--serif);font-size:1.05rem;margin-top:8px}
+.ring-num b{color:var(--teal);font-size:1.3rem}
+.ring-note{font-size:.68rem;color:var(--ink60);max-width:150px;margin:8px auto 0}
+
+/* ---------- rules + footer ---------- */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px;margin:26px 0 8px}
+.rule{border:1px solid var(--line);border-top:3px solid var(--rust);border-radius:10px;background:#fff;padding:12px 14px}
+.rule b{font-family:var(--serif);display:block;margin-bottom:4px}
+.rule p{font-size:.76rem;color:var(--ink60);line-height:1.45}
+footer{border-top:2px solid var(--ink);margin-top:30px;padding:22px 20px 34px;max-width:1020px;margin-left:auto;margin-right:auto}
+footer .fine{font-size:.7rem;color:var(--ink60);line-height:1.6;max-width:78ch}
+footer .tag{font-family:var(--serif);font-size:.86rem;margin-top:10px}
+footer .tag em{color:var(--teal)}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <!-- LOGO SLOT · house standard: replace this text mark with the embedded logo when at hand:
+       <img src="data:image/jpeg;base64,...." alt="Cyber.SoHo" style="height:34px">
+       (cyber_soho.png — the data is JPEG despite the .png name) -->
+  <div class="brand"><em>Cyber</em>.SoHo<small>Educational Hub</small></div>
+  <div class="nav-links" aria-label="Sections">
+    <a href="#chain">Chain</a><a href="#estate">Estate</a><a href="#calendar">Calendar</a>
+    <a href="#manual">Manual</a><a href="#marks">Marks</a><a href="#submit">Ship it</a>
+  </div>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div class="eyebrow">420-D03-AB Cyber Defense · Competency EZ03 · Cohort CYB-01 · Fall 2026</div>
+  <h1>One body of work.<br>Graded <span class="rust">three times.</span></h1>
+  <p>Six Hands-on Labs build the pieces. The Final Project assembles them into one defended
+     infrastructure for the client, Laurentide Outfitters inc. The Course Procedure Manual is the same
+     work a third time — written so a stranger could rebuild it. Same machines, same evidence, three grades.</p>
+  <div class="weights" aria-label="Grade weights">
+    <div class="wchip teal"><b>30&nbsp;%</b><span>6 labs × 5 %</span></div><div class="wplus">+</div>
+    <div class="wchip teal"><b>15&nbsp;%</b><span>Final Project</span></div><div class="wplus">+</div>
+    <div class="wchip rust"><b>10&nbsp;%</b><span>Procedure Manual</span></div>
+    <div class="wsum">= <b>55&nbsp;%</b> of your grade, one infrastructure</div>
+  </div>
+  <div class="countdown">
+    <div class="cd-label">Submission countdown</div>
+    <div class="cd-digits" id="cd" aria-live="off">
+      <div><b id="cd-d">–</b><span>days</span></div>
+      <div><b id="cd-h">–</b><span>hrs</span></div>
+      <div><b id="cd-m">–</b><span>min</span></div>
+      <div><b id="cd-s">–</b><span>sec</span></div>
+    </div>
+    <div class="cd-when">Wed 21 Oct 2026 · 23:59 EDT · Moodle → Final Project DropBox</div>
+  </div>
+</header>
+<!-- ================= 1 · THE CHAIN ================= -->
+<section id="chain">
+  <div class="sec-head"><span class="sec-no">1</span><h2>The chain — step on the stones</h2>
+    <button class="fold" aria-expanded="true">Fold</button></div>
+  <div class="sec-body">
+    <p class="lede">The Final Project is <strong>not a new build</strong> — it is these six stones crossed in order,
+       then re-tested end to end. Tap a stone to see what it builds and what it carries across.</p>
+    <div class="path" id="stones" role="tablist" aria-label="The six labs">
+      <button class="stone active" data-lab="0" role="tab" aria-selected="true"><b>01</b><span>Zoning &amp; Perimeter</span><small>due 13 Sept</small></button>
+      <button class="stone" data-lab="1" role="tab" aria-selected="false"><b>02</b><span>Privilege Mngmt</span><small>due 20 Sept</small></button>
+      <button class="stone" data-lab="2" role="tab" aria-selected="false"><b>03</b><span>Host Hardening</span><small>due 27 Sept</small></button>
+      <button class="stone" data-lab="3" role="tab" aria-selected="false"><b>04</b><span>IDS / IPS</span><small>due 4 Oct</small></button>
+      <button class="stone" data-lab="4" role="tab" aria-selected="false"><b>05</b><span>Device Sec &amp; Protocols</span><small>due 11 Oct</small></button>
+      <button class="stone" data-lab="5" role="tab" aria-selected="false"><b>06</b><span>VPN &amp; Encryption</span><small>due 18 Oct</small></button>
+      <div class="path-arrow" aria-hidden="true">→</div>
+      <div class="fp-tile"><b>FINAL PROJECT · 15&nbsp;%</b><span>all six assembled,<br>re-tested end to end</span></div>
+    </div>
+    <div class="cpm-strip"><b>↳ Course Procedure Manual · 10&nbsp;%</b>
+      <span>the same work, written for a stranger — one seven-section entry per stone, consolidated at the end.</span></div>
+
+    <div class="lab-detail" id="lab-detail" role="tabpanel" aria-live="polite"><!-- filled by script --></div>
+
+    <div class="four" aria-label="What every lab produces">
+      <div><b>A working configuration</b><span>the control, live in your pod</span></div>
+      <div><b>Screenshot evidence</b><span>named per the standard, undoctored</span></div>
+      <div><b>A test result</b><span>proving the control functions — not that it exists</span></div>
+      <div><b>A short written finding</b><span>plus the lab’s Manual entry, same evening</span></div>
+    </div>
+    <p class="four-cap">Every lab produces exactly these four things. <b>Four things. Every time. Six times.</b></p>
+  </div>
+</section>
+
+<!-- ================= 2 · THE ESTATE ================= -->
+<section id="estate">
+  <div class="sec-head"><span class="sec-no">2</span><h2>The estate — five zones, five machines</h2>
+    <button class="fold" aria-expanded="true">Fold</button></div>
+  <div class="sec-body">
+    <p class="lede">Everything lives in your own isolated pod on the CyberQuébec range (OpenNebula 6.10, FireEdge
+       Sunstone). VMs are wired through Service Templates — the roles bring the networks with them.</p>
+    <div class="map-wrap">
+    <svg viewBox="0 0 780 452" role="img" aria-label="Network map: WAN feeds fw-01 which feeds the DMZ, SRV, LAN and MGMT zones; a dashed WireGuard tunnel lands in MGMT">
+      <style>
+        .zt{font:700 14px var(--serif)} .zn{font:11px var(--mono);fill:#5a6363}
+        .vm{font:700 12px var(--sans)} .vr{font:10.5px var(--sans);fill:#5a6363}
+        .wt{font:700 13px var(--sans);fill:#FAF7F2} .ws{font:10.5px var(--mono);fill:#CDE7E6}
+        .lg{font:10.5px var(--sans);fill:#5a6363}
+      </style>
+      <!-- WAN -->
+      <rect x="20" y="16" width="740" height="46" rx="9" fill="#1F2A2A"/>
+      <text x="390" y="35" text-anchor="middle" class="wt">WAN — simulated Internet (untrusted)</text>
+      <text x="390" y="52" text-anchor="middle" class="ws">203.0.113.0/24 · RFC 5737</text>
+      <line x1="390" y1="62" x2="390" y2="102" stroke="#1F2A2A" stroke-width="2.5"/>
+      <!-- fw-01 -->
+      <rect x="235" y="102" width="310" height="62" rx="10" fill="#0E7C7B"/>
+      <text x="390" y="128" text-anchor="middle" class="wt">fw-01 · OPNsense 25.7 LTS</text>
+      <text x="390" y="147" text-anchor="middle" class="ws">NAT · Suricata inline · WireGuard</text>
+      <!-- bus -->
+      <line x1="390" y1="164" x2="390" y2="198" stroke="#0E7C7B" stroke-width="2.5"/>
+      <line x1="112" y1="198" x2="668" y2="198" stroke="#0E7C7B" stroke-width="2.5"/>
+      <line x1="112" y1="198" x2="112" y2="232" stroke="#0E7C7B" stroke-width="2.5"/>
+      <line x1="298" y1="198" x2="298" y2="232" stroke="#0E7C7B" stroke-width="2.5"/>
+      <line x1="484" y1="198" x2="484" y2="232" stroke="#0E7C7B" stroke-width="2.5"/>
+      <line x1="668" y1="198" x2="668" y2="232" stroke="#0E7C7B" stroke-width="2.5"/>
+      <!-- DMZ -->
+      <rect x="26" y="232" width="172" height="158" rx="10" fill="rgba(181,68,12,.07)" stroke="#B5440C" stroke-width="2"/>
+      <text x="112" y="258" text-anchor="middle" class="zt" fill="#B5440C">DMZ</text>
+      <text x="112" y="275" text-anchor="middle" class="zn">172.16.10.0/24</text>
+      <line x1="46" y1="288" x2="178" y2="288" stroke="rgba(31,42,42,.16)"/>
+      <text x="112" y="311" text-anchor="middle" class="vm">app-01</text>
+      <text x="112" y="328" text-anchor="middle" class="vr">public web — nginx</text>
+      <text x="112" y="343" text-anchor="middle" class="vr">TLS from your own CA</text>
+      <!-- SRV -->
+      <rect x="212" y="232" width="172" height="158" rx="10" fill="rgba(14,124,123,.07)" stroke="#0E7C7B" stroke-width="2"/>
+      <text x="298" y="258" text-anchor="middle" class="zt" fill="#0E7C7B">SRV</text>
+      <text x="298" y="275" text-anchor="middle" class="zn">172.16.20.0/24</text>
+      <line x1="232" y1="288" x2="364" y2="288" stroke="rgba(31,42,42,.16)"/>
+      <text x="298" y="311" text-anchor="middle" class="vm">dc-01</text>
+      <text x="298" y="328" text-anchor="middle" class="vr">AD DS · DNS · GPO</text>
+      <text x="298" y="343" text-anchor="middle" class="vr">the identity plane</text>
+      <!-- LAN -->
+      <rect x="398" y="232" width="172" height="158" rx="10" fill="#FFFFFF" stroke="#1F2A2A" stroke-width="2"/>
+      <text x="484" y="258" text-anchor="middle" class="zt">LAN</text>
+      <text x="484" y="275" text-anchor="middle" class="zn">172.16.30.0/24</text>
+      <line x1="418" y1="288" x2="550" y2="288" stroke="rgba(31,42,42,.16)"/>
+      <text x="484" y="311" text-anchor="middle" class="vm">ws-01</text>
+      <text x="484" y="328" text-anchor="middle" class="vr">domain-joined client</text>
+      <text x="484" y="343" text-anchor="middle" class="vr">where users live</text>
+      <!-- MGMT -->
+      <rect x="584" y="232" width="172" height="158" rx="10" fill="rgba(14,124,123,.11)" stroke="#0E7C7B" stroke-width="2" stroke-dasharray="7 4"/>
+      <text x="670" y="258" text-anchor="middle" class="zt" fill="#0E7C7B">MGMT</text>
+      <text x="670" y="275" text-anchor="middle" class="zn">172.16.99.0/24</text>
+      <line x1="604" y1="288" x2="736" y2="288" stroke="rgba(31,42,42,.16)"/>
+      <text x="670" y="311" text-anchor="middle" class="vm">mon-01</text>
+      <text x="670" y="328" text-anchor="middle" class="vr">Wazuh manager · step-ca</text>
+      <text x="670" y="343" text-anchor="middle" class="vr">admin access only from here</text>
+      <!-- VPN -->
+      <path d="M 726 62 C 776 130, 776 220, 740 268" fill="none" stroke="#B5440C" stroke-width="2.5" stroke-dasharray="8 5"/>
+      <line x1="30" y1="424" x2="66" y2="424" stroke="#B5440C" stroke-width="2.5" stroke-dasharray="8 5"/>
+      <text x="74" y="428" class="lg">wg0 — WireGuard road-warrior VPN · 10.10.10.0/24 · lands in MGMT, reaches only what the traffic matrix says</text>
+    </svg>
+    </div>
+    <p class="map-cap">Default-deny between zones — every crossing is an explicit rule you can point to.
+       Reference addressing; adjust inside RFC 1918 if you document why. Quota capped at four VMs?
+       Fold mon-01 onto dc-01 and record the exception in the Manual — documented exceptions are engineering, silent ones are findings.</p>
+  </div>
+</section>
+
+<!-- ================= 3 · CALENDAR ================= -->
+<section id="calendar">
+  <div class="sec-head"><span class="sec-no">3</span><h2>Calendar — six Sundays, then the last week</h2>
+    <button class="fold" aria-expanded="true">Fold</button></div>
+  <div class="sec-body">
+    <div class="due-strip">
+      <div>L01 → <b>Sun 13 Sept</b></div><div>L02 → <b>Sun 20 Sept</b></div><div>L03 → <b>Sun 27 Sept</b></div>
+      <div>L04 → <b>Sun 4 Oct</b></div><div>L05 → <b>Sun 11 Oct</b></div><div>L06 → <b>Sun 18 Oct</b></div>
+    </div>
+    <p class="due-note">Labs ship Sundays 23:59 EDT to their Moodle DropBox — the lab brief is authoritative.
+       Late work: <b>−10&nbsp;% per calendar day.</b> Write the Manual entry the same evening: forty minutes now, or a lost week in October.</p>
+    <div class="tl" aria-label="Final Project week">
+      <div class="tl-item"><span class="d">Tue 13 Oct</span><span class="m">M0 · Kickoff</span><span class="t">Quiz 04 · architecture sketch approved before you leave</span></div>
+      <div class="tl-item"><span class="d">Wed 14 Oct</span><span class="m">M1 · Skeleton live</span><span class="t">zones up · default-deny enforcing · entry-point register current</span></div>
+      <div class="tl-item"><span class="d">Sat 17 Oct</span><span class="m">M2 · Hosts defended</span><span class="t">identity plane · hardening re-scored · agents in · Suricata triaged</span></div>
+      <div class="tl-item"><span class="d">Tue 20 Oct</span><span class="m">M3 · Crypto + proof</span><span class="t">CA · TLS · VPN live · validation matrix run · restore drill · dry-run defence</span></div>
+      <div class="tl-item big"><span class="d">Wed 21 Oct</span><span class="m">SUBMIT 23:59</span><span class="t">Final Review · live defences · the archive ships</span></div>
+      <div class="tl-item"><span class="d">Sat 24 Oct</span><span class="m">Final Exam</span><span class="t">25 % · pod stays running until here</span></div>
+    </div>
+  </div>
+</section>
+<!-- ================= 4 · THE MANUAL ================= -->
+<section id="manual">
+  <div class="sec-head"><span class="sec-no">4</span><h2>The Manual — anatomy of the hand-over</h2>
+    <button class="fold" aria-expanded="true">Fold</button></div>
+  <div class="sec-body">
+    <p class="lede">Picture the Monday you inherit a network you did not build. Everything you wish existed
+       that morning — that is your Course Procedure Manual, written for the next technician at Laurentide Outfitters.</p>
+    <div class="quote"><b>The classmate test:</b> a classmate who was not with you could follow it start to finish —
+       rebuild and verify your estate — without asking you a single question.</div>
+    <div class="parts">
+      <div class="part"><h3><b>A</b>Front matter</h3><span class="when">opens at Lab 01 · stays current</span>
+        <ul><li>Cover &amp; document control</li><li>Revision history</li><li>Scope &amp; rules of engagement</li>
+            <li>Environment: diagram · assets · IP plan · role model</li><li>Evidence Register (living table)</li></ul></div>
+      <div class="part"><h3><b>B</b>Six lab procedures</h3><span class="when">written the same evening as the lab</span>
+        <ul><li>One entry per lab, Labs 01–06</li><li>Each in the seven mandatory sections below</li>
+            <li>Ships inside that lab’s zip</li><li>This is the “containing documented labs”</li></ul></div>
+      <div class="part"><h3><b>C</b>Consolidation</h3><span class="when">assembled S18–S22</span>
+        <ul><li>As-built firewall rules · hardening baseline</li><li>Detection &amp; VPN/PKI design</li>
+            <li>Validation matrix · backup &amp; restore drill</li><li>Limitations · residual risks · change log · references</li></ul></div>
+    </div>
+    <div class="rail" aria-label="The seven mandatory sections">
+      <div><b>1</b>Objective</div><span class="sep">→</span>
+      <div><b>2</b>Scope &amp; assumptions</div><span class="sep">→</span>
+      <div><b>3</b>Pre-conditions</div><span class="sep">→</span>
+      <div><b>4</b>Procedure</div><span class="sep">→</span>
+      <div><b>5</b>Verification</div><span class="sep">→</span>
+      <div class="rb"><b>6</b>Rollback</div><span class="sep">→</span>
+      <div><b>7</b>Evidence</div>
+    </div>
+    <div class="diary"><b>No rollback, no procedure.</b> If you cannot say how to undo it, you have not written
+       a procedure — you have written a diary entry. Seven sections. Every entry. No exceptions.</div>
+    <div class="evi">
+      <code>CYB01_LASTNAME_LABxx_EVIDyy_YYYYMMDD_short-description.ext</code>
+      <p>Evidence naming standard — every item lands in the Register. Keep 4–6 strong items per lab
+         (diagram · config excerpt · test result · log or alert · before/after · finding). No screenshot spam.
+         Final Project evidence uses <span class="mono">LAB07</span>. Parameterize configs; redact every secret.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 · MARKS ================= -->
+<section id="marks">
+  <div class="sec-head"><span class="sec-no">5</span><h2>Where the marks live</h2>
+    <button class="fold" aria-expanded="true">Fold</button></div>
+  <div class="sec-body">
+    <div class="bars-wrap">
+      <div class="bars"><h3>Final Project — <b>15&nbsp;%</b>, five criteria</h3>
+        <div class="bar"><span class="lbl">E1 · Architecture, zoning &amp; perimeter</span><span class="val">3.0&nbsp;%</span><div class="track"><div class="fill" style="width:100%"></div></div></div>
+        <div class="bar"><span class="lbl">E2 · Host access control &amp; hardening</span><span class="val">3.0&nbsp;%</span><div class="track"><div class="fill" style="width:100%"></div></div></div>
+        <div class="bar"><span class="lbl">E3 · Network access, IDS/IPS &amp; protocols</span><span class="val">3.0&nbsp;%</span><div class="track"><div class="fill" style="width:100%"></div></div></div>
+        <div class="bar"><span class="lbl">E4 · Cryptography, PKI &amp; VPN</span><span class="val">3.0&nbsp;%</span><div class="track"><div class="fill" style="width:100%"></div></div></div>
+        <div class="bar"><span class="lbl">Validation, resilience &amp; live defence</span><span class="val">3.0&nbsp;%</span><div class="track"><div class="fill" style="width:100%"></div></div></div>
+      </div>
+      <div class="bars"><h3>Procedure Manual — <b>10&nbsp;%</b>, seven criteria</h3>
+        <div class="bar rustbar"><span class="lbl">Reproducibility — a stranger rebuilds it</span><span class="val">2.0&nbsp;%</span><div class="track"><div class="fill" style="width:100%"></div></div></div>
+        <div class="bar rustbar"><span class="lbl">Technical accuracy — versions dated, no contradictions</span><span class="val">2.0&nbsp;%</span><div class="track"><div class="fill" style="width:100%"></div></div></div>
+        <div class="bar rustbar"><span class="lbl">Completeness — A + B + C, all six labs</span><span class="val">1.5&nbsp;%</span><div class="track"><div class="fill" style="width:75%"></div></div></div>
+        <div class="bar rustbar"><span class="lbl">Evidence quality — named, registered, meaningful</span><span class="val">1.5&nbsp;%</span><div class="track"><div class="fill" style="width:75%"></div></div></div>
+        <div class="bar rustbar"><span class="lbl">Change control — revisions + change log</span><span class="val">1.0&nbsp;%</span><div class="track"><div class="fill" style="width:50%"></div></div></div>
+        <div class="bar rustbar"><span class="lbl">Clarity — abbreviations expanded, readable</span><span class="val">1.0&nbsp;%</span><div class="track"><div class="fill" style="width:50%"></div></div></div>
+        <div class="bar rustbar"><span class="lbl">Professional formatting</span><span class="val">1.0&nbsp;%</span><div class="track"><div class="fill" style="width:50%"></div></div></div>
+      </div>
+    </div>
+    <p class="marks-cap">Partial credit works like production work: a control that exists but was never proven earns
+       <b>half</b> · claimed but absent earns <b>zero</b> · a documented, justified exception earns <b>respect</b>.</p>
+  </div>
+</section>
+
+<!-- ================= 6 · SHIP IT ================= -->
+<section id="submit">
+  <div class="sec-head"><span class="sec-no">6</span><h2>Ship it — the archive</h2>
+    <button class="fold" aria-expanded="true">Fold</button></div>
+  <div class="sec-body">
+    <div class="ship">
+      <div>
+        <div class="zipline">CYB01_<b>LastName_FirstName</b>_FINAL_PROJECT.zip</div>
+        <p class="ship-when">Moodle → Final Project DropBox · <b>Wed 21 Oct 2026, 23:59 EDT</b> · pod stays running through Sat 24 Oct.</p>
+        <div class="checks" id="checks">
+          <button class="chk"><span class="box">✓</span><span><b>Course Procedure Manual</b> — PDF export + the Markdown source</span></button>
+          <button class="chk"><span class="box">✓</span><span><b>Configuration exports</b> — parameterized, every secret redacted</span></button>
+          <button class="chk"><span class="box">✓</span><span><b>Evidence pack</b> — named per standard, matching the Register</span></button>
+          <button class="chk"><span class="box">✓</span><span><b>Validation matrix</b> — every row carries a result + evidence ID</span></button>
+          <button class="chk"><span class="box">✓</span><span><b>AI declaration</b> — one line: tool, model, what you changed after checking</span></button>
+          <button class="chk"><span class="box">✓</span><span><b>Change log</b> — if any tool was substituted: what, and why</span></button>
+          <button class="chk"><span class="box">✓</span><span><b>Defence booked</b> — 10-minute live slot (S21–S22): one block, one IDS drop, one handshake, one restore</span></button>
+        </div>
+      </div>
+      <div class="ring-card">
+        <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#F3EDE2" stroke-width="11"/>
+          <circle id="ring" cx="60" cy="60" r="50" fill="none" stroke="#0E7C7B" stroke-width="11"
+                  stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16"
+                  transform="rotate(-90 60 60)" style="transition:stroke-dashoffset .35s ease"/>
+          <text x="60" y="66" text-anchor="middle" style="font:700 22px var(--serif);fill:#1F2A2A" id="ring-txt">0/7</text>
+        </svg>
+        <div class="ring-num">ready to ship</div>
+        <p class="ring-note">Ticks live on this page only — nothing is saved. Your proof is the DropBox receipt.</p>
+      </div>
+    </div>
+    <div class="rules">
+      <div class="rule"><b>Your pod only.</b><p>Scope is the law — Criminal Code of Canada s.342.1 &amp; s.430(1.1) · U.S. CFAA §1030 · EU 2013/40/EU · Spain LO 10/1995 · Law 25 / PIPEDA / GDPR.</p></div>
+      <div class="rule"><b>Late costs.</b><p>−10&nbsp;% per calendar day, every deliverable, department policy. The countdown at the top is not decorative.</p></div>
+      <div class="rule"><b>The AI rule.</b><p>“The model drafts. The analyst decides. The analyst’s name goes on the record.” Local Ollama, bound to 127.0.0.1 — nothing leaves the machine.</p></div>
+      <div class="rule"><b>Never submit real secrets.</b><p>No real passwords, keys or personal data anywhere. Name what a secret is and where it lives — never the value.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="fine">© 2026 Cyber.SoHo Educational Hub. Independent; not affiliated with/endorsed by the platforms named;
+     trademarks belong to their owners. Rubrics total the official 15&nbsp;% and 10&nbsp;%. “As is” for education;
+     not legal/security advice. Authorised, in-range use only — Criminal Code of Canada s.342.1 &amp; s.430(1.1);
+     U.S. CFAA §1030; EU Directive 2013/40/EU; Spain LO 10/1995; Law 25 / PIPEDA / GDPR.</p>
+  <br></br>
+  <p class="tag"><em>From the Industry to the Classroom — Building the IT’s Future, Today and Together !</em> — © 2026 — ALL Rights Reserverd</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  /* ---- lab data ---- */
+  var LABS=[
+    {t:"LAB 01 — Network Zoning & Perimeter Firewall",m:"Sat 29 Aug · Tue 1 Sept — ships Sun 13 Sept, 23:59 EDT",
+     b:"fw-01 (OPNsense 25.7 LTS) stands up as the perimeter. Five zones carved, addressing assigned, the first default-deny inter-zone rule set written with aliases, every entry point registered.",
+     c:"The skeleton everything else hangs on — zones, IP plan, perimeter, entry-point register.",r:"→ Final Project R1",
+     k:["OPNsense 25.7","aliases","default-deny"]},
+    {t:"LAB 02 — Privilege Management on Windows & Linux",m:"Wed 2 Sept · Tue 8 Sept — ships Sun 20 Sept, 23:59 EDT",
+     b:"The identity plane: Active Directory Domain Services on dc-01 — users, groups, Group Policy Objects; sudoers and need-to-know permissions on Linux. Every default credential dies, env-admin / admin-env first.",
+     c:"The account / role model — who may touch what, from where, provably.",r:"→ Final Project R2",
+     k:["AD DS","GPO","sudoers","least privilege"]},
+    {t:"LAB 03 — Host Hardening & Host Firewalls",m:"Wed 9 Sept · Sat 12 Sept — ships Sun 27 Sept, 23:59 EDT",
+     b:"Hosts scored with Lynis / OpenSCAP against CIS Benchmarks, hardened, re-scored. nftables on Linux, Defender Firewall via GPO on Windows, per host role. Improvement you can measure.",
+     c:"The hardened host baselines and system firewalls, with before/after proof.",r:"→ Final Project R2",
+     k:["Lynis","OpenSCAP","CIS","nftables"]},
+    {t:"LAB 04 — IDS/IPS Deployment & Validation",m:"Tue 15 Sept · Wed 16 Sept — ships Sun 4 Oct, 23:59 EDT",
+     b:"Suricata 8.x inline on OPNsense with the ET Open ruleset plus your own custom rule; Wazuh agents reporting to the manager. Real alerts triggered, triaged, and mapped to MITRE ATT&CK v19.",
+     c:"The detection layer and the alert-triage evidence.",r:"→ Final Project R3",
+     k:["Suricata 8.x","Wazuh 4.x","ATT&CK v19"]},
+    {t:"LAB 05 — Network Device Security & Secure Protocols",m:"Wed 23 Sept · Sat 26 Sept — ships Sun 11 Oct, 23:59 EDT",
+     b:"The management plane locks: SSH key-only with ssh-audit proof, HTTPS-only administration reachable from MGMT alone, NTP coherence, patch posture recorded, the device registry established, rules consolidated.",
+     c:"The secured management plane, the device registry, the consolidated least-privilege rule set.",r:"→ Final Project R3 · R6",
+     k:["OpenSSH","ssh-audit","device registry"]},
+    {t:"LAB 06 — VPN Setup & Encryption Configuration",m:"Wed 7 Oct · Sat 10 Oct — ships Sun 18 Oct, 23:59 EDT",
+     b:"Your internal Certificate Authority (step-ca) issues real certificates; testssl.sh validates the TLS. WireGuard road-warrior access lands in a restricted policy. Argon2 / yescrypt for password storage, LUKS2 for a volume at rest.",
+     c:"The entire cryptography layer — PKI, TLS, VPN, hashing, encryption at rest.",r:"→ Final Project R4",
+     k:["step-ca","WireGuard","testssl.sh","LUKS2"]}
+  ];
+  var detail=document.getElementById("lab-detail");
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  function render(i){
+    var L=LABS[i],h="";
+    h+="<h3>"+esc(L.t)+"</h3><div class=\"meta\">"+esc(L.m)+"</div>";
+    h+="<p><b>Builds:</b> "+esc(L.b)+"</p>";
+    h+="<div class=\"carry\"><b>Carries into the project:</b> "+esc(L.c)+" <b>"+esc(L.r)+"</b></div>";
+    h+="<div class=\"tool-chips\">";
+    for(var j=0;j<L.k.length;j++){h+="<i>"+esc(L.k[j])+"</i>";}
+    h+="</div>";
+    detail.innerHTML=h;
+  }
+  var stones=document.querySelectorAll(".stone");
+  stones.forEach(function(s){
+    s.addEventListener("click",function(){
+      stones.forEach(function(x){x.classList.remove("active");x.setAttribute("aria-selected","false")});
+      s.classList.add("active");s.setAttribute("aria-selected","true");
+      render(parseInt(s.getAttribute("data-lab"),10));
+    });
+  });
+  render(0);
+
+  /* ---- countdown ---- */
+  var due=new Date("2026-10-21T23:59:00-04:00").getTime();
+  var cd={d:document.getElementById("cd-d"),h:document.getElementById("cd-h"),
+          m:document.getElementById("cd-m"),s:document.getElementById("cd-s")};
+  function pad(n){return (n<10?"0":"")+n}
+  function tick(){
+    var left=due-Date.now();
+    if(left<=0){document.getElementById("cd").innerHTML=
+      "<div style=\"font-family:var(--serif);font-size:1.1rem\">Deadline passed — the pod stays up. <b style=\"color:var(--rust)\">Final Exam: Sat 24 Oct.</b></div>";return;}
+    var d=Math.floor(left/86400000),h=Math.floor(left%86400000/3600000),
+        m=Math.floor(left%3600000/60000),s=Math.floor(left%60000/1000);
+    cd.d.textContent=d;cd.h.textContent=pad(h);cd.m.textContent=pad(m);cd.s.textContent=pad(s);
+    setTimeout(tick,1000);
+  }
+  tick();
+
+  /* ---- section folds ---- */
+  document.querySelectorAll(".fold").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var sec=btn.closest("section"),folded=sec.classList.toggle("folded");
+      btn.textContent=folded?"Unfold":"Fold";
+      btn.setAttribute("aria-expanded",folded?"false":"true");
+    });
+  });
+
+  /* ---- submission checklist + ring (in-memory only) ---- */
+  var C=314.16,ring=document.getElementById("ring"),rt=document.getElementById("ring-txt"),
+      chks=document.querySelectorAll("#checks .chk");
+  function refresh(){
+    var n=document.querySelectorAll("#checks .chk.done").length;
+    ring.style.strokeDashoffset=(C-(n/chks.length)*C).toFixed(2);
+    rt.textContent=n+"/"+chks.length;
+    ring.setAttribute("stroke",n===chks.length?"#B5440C":"#0E7C7B");
+  }
+  chks.forEach(function(c){
+    c.setAttribute("aria-pressed","false");
+    c.addEventListener("click",function(){
+      var on=c.classList.toggle("done");
+      c.setAttribute("aria-pressed",on?"true":"false");refresh();
+    });
+  });
+  refresh();
+})();
+</script>
+</body>
+</html>

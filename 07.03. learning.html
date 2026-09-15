@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 7 · IDS &amp; IPS Study Hub — 420-D03-AB Cyber Defense</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-out; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Flashcard Flip Animation */
+        .flashcard-container { perspective: 1000px; }
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        .flashcard-inner.flipped { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .card-back { transform: rotateY(180deg); background-color: #eef2ff; border: 2px solid #6366f1; }
+        .card-front { background-color: white; border: 2px solid #e2e8f0; }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            height: 300px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🛡️</span>
+                <h1 class="text-xl font-bold tracking-tight text-slate-800">IDS &amp; IPS Study Hub</h1>
+            </div>
+            <nav class="flex bg-slate-100 p-1 rounded-xl shadow-inner">
+                <button onclick="switchTab('dashboard')" class="nav-btn active px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-white text-indigo-600 shadow-sm" id="btn-dashboard">Dashboard</button>
+                <button onclick="switchTab('flashcards')" class="nav-btn px-6 py-2 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900" id="btn-flashcards">Flashcards</button>
+                <button onclick="switchTab('quiz')" class="nav-btn px-6 py-2 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-slate-900" id="btn-quiz">Quiz</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl mx-auto px-4 py-8 w-full">
+
+        <!-- ================= DASHBOARD ================= -->
+        <section id="dashboard" class="tab-content active space-y-8">
+            <div class="bg-indigo-600 rounded-3xl p-8 text-white shadow-xl shadow-indigo-100">
+                <p class="text-xs uppercase font-bold text-indigo-200 tracking-widest mb-3">420-D03-AB Cyber Defense · Class 7</p>
+                <h2 class="text-3xl font-bold mb-4">Intrusion Detection &amp; Prevention Systems</h2>
+                <p class="text-indigo-100 max-w-2xl leading-relaxed">
+                    A firewall decides <em>whether</em> traffic may pass. It does not judge <em>what the traffic is trying to do</em>.
+                    This Study Hub covers the systems that fill that gap: what an IDS alerts on, what an IPS blocks, where the sensors go,
+                    and which CIS Control 13 safeguards they satisfy. Use the tabs above to memorise the vocabulary, then test your
+                    architectural judgment.
+                </p>
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-indigo-500/30 p-4 rounded-2xl flex items-center gap-4 border border-indigo-400/30">
+                        <span class="text-3xl">🗂️</span>
+                        <div>
+                            <div class="text-xs uppercase font-bold text-indigo-200 tracking-widest">Memorization</div>
+                            <div class="text-lg font-bold">25 Flashcards</div>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-500/30 p-4 rounded-2xl flex items-center gap-4 border border-indigo-400/30">
+                        <span class="text-3xl">📝</span>
+                        <div>
+                            <div class="text-xs uppercase font-bold text-indigo-200 tracking-widest">Assessment</div>
+                            <div class="text-lg font-bold">10 Practice Questions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson map -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <h3 class="font-bold text-lg mb-3">The four lessons</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start gap-2"><span class="font-bold text-indigo-600">1.</span> <span><b class="text-slate-800">IDS and IPS</b> — definitions, the three detection methods, alert versus drop, and what a mistake costs in each mode.</span></li>
+                        <li class="flex items-start gap-2"><span class="font-bold text-indigo-600">2.</span> <span><b class="text-slate-800">Architecture</b> — the four IDPS components, the six-stage network sensor pipeline, and what a host agent watches.</span></li>
+                        <li class="flex items-start gap-2"><span class="font-bold text-indigo-600">3.</span> <span><b class="text-slate-800">Placement</b> — five candidate positions, mirror port vs tap vs inline, and the <code class="bg-slate-100 px-1 rounded">HOME_NET</code> setting.</span></li>
+                        <li class="flex items-start gap-2"><span class="font-bold text-indigo-600">4.</span> <span><b class="text-slate-800">CIS Controls</b> — Control 13 safeguard by safeguard, and why detection comes after hygiene.</span></li>
+                    </ul>
+                </div>
+                <div class="bg-slate-900 p-6 rounded-2xl text-white">
+                    <h3 class="font-bold text-lg mb-2 text-indigo-400">Quick Pro-Tip</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Detection is identical in both modes — only the action differs. That is why a new sensor is almost always started
+                        in IDS mode: out-of-band, a false positive costs an analyst a few minutes; inline, the same false positive takes
+                        the web shop offline. <span class="text-indigo-300 font-semibold">Tune before you block.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <h3 class="font-bold text-lg mb-2">Instructions</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start gap-2"><span>✅</span> Use Flashcards to master the terminology and the "What."</li>
+                        <li class="flex items-start gap-2"><span>✅</span> Take the Quiz to practise "Architectural Judgment" and the "Why."</li>
+                        <li class="flex items-start gap-2"><span>✅</span> Complete the quiz to see your data-driven performance breakdown.</li>
+                        <li class="flex items-start gap-2"><span>✅</span> Every question has a hint and a rationale for <em>every</em> option — read the wrong ones too.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200">
+                    <h3 class="font-bold text-lg mb-2">Reference documents</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start gap-2"><span>📘</span> <span><b class="text-slate-800">NIST SP 800-94</b> — Guide to Intrusion Detection and Prevention Systems: the source of the vocabulary of Lessons 1 and 2.</span></li>
+                        <li class="flex items-start gap-2"><span>📗</span> <span><b class="text-slate-800">CIS Controls v8.1</b> (June 2024) — 18 Controls, 153 Safeguards, 3 Implementation Groups. Control 13 is "Network Monitoring and Defense."</span></li>
+                        <li class="flex items-start gap-2"><span>🧰</span> <span><b class="text-slate-800">Tools of LAB_04</b> — Suricata or Snort (IDS/IPS), Wazuh or OSSEC (host agent), OPNsense or pfSense (firewall with built-in Suricata).</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FLASHCARDS ================= -->
+        <section id="flashcards" class="tab-content space-y-8">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold text-slate-800">Knowledge Cards</h2>
+                <p class="text-slate-500 text-sm mt-1">Click the card to flip it, use the arrows to navigate.</p>
+            </div>
+
+            <div class="max-w-md mx-auto flashcard-container">
+                <div class="flashcard-inner" id="flashcard-inner" onclick="this.classList.toggle('flipped')">
+                    <div class="card-front">
+                        <p id="card-front-text" class="text-xl font-bold text-slate-800"></p>
+                    </div>
+                    <div class="card-back">
+                        <p id="card-back-text" class="text-base text-indigo-900 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center gap-6">
+                <button onclick="prevCard()" class="p-3 rounded-full bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-sm">⬅️</button>
+                <div class="text-slate-400 font-mono text-sm" id="card-counter">1 / 25</div>
+                <button onclick="nextCard()" class="p-3 rounded-full bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-sm">➡️</button>
+            </div>
+
+            <div class="max-w-md mx-auto h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div id="card-progress" class="h-full bg-indigo-500 transition-all duration-300" style="width: 4%"></div>
+            </div>
+        </section>
+
+        <!-- ================= QUIZ ================= -->
+        <section id="quiz" class="tab-content space-y-8">
+            <div id="quiz-intro" class="text-center py-12">
+                <div class="text-5xl mb-4">🏆</div>
+                <h2 class="text-3xl font-bold text-slate-800">Ready for the Assessment?</h2>
+                <p class="text-slate-500 mt-2 mb-8">Test your ability to pick the right detection tool for real-world scenarios.</p>
+                <button onclick="startQuiz()" class="bg-indigo-600 text-white px-10 py-4 rounded-2xl font-bold shadow-lg hover:bg-indigo-700 transition-transform hover:-translate-y-1">Start Quiz</button>
+            </div>
+
+            <div id="quiz-active" class="hidden max-w-2xl mx-auto space-y-6">
+                <div class="flex justify-between items-center text-sm font-bold text-slate-400">
+                    <span id="quiz-progress-text">Question 1 of 10</span>
+                    <span id="quiz-score-live">Score: 0</span>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                    <div id="quiz-question" class="text-xl font-bold text-slate-800 mb-6"></div>
+                    <div id="quiz-options" class="space-y-3"></div>
+
+                    <div id="quiz-feedback" class="hidden mt-6 p-4 rounded-xl text-sm border"></div>
+
+                    <div id="quiz-hint-box" class="mt-6 text-center">
+                        <button onclick="toggleHint()" id="hint-toggle-btn" class="text-xs text-indigo-500 font-bold hover:underline">Need a hint? 💡</button>
+                        <p id="quiz-hint" class="hidden mt-2 text-xs text-slate-500 italic"></p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <button id="next-q-btn" onclick="nextQuestion()" class="hidden ml-auto bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-800">Next Question</button>
+                </div>
+            </div>
+
+            <div id="quiz-results" class="hidden text-center space-y-8 animate-fadeIn">
+                <h2 class="text-3xl font-bold text-slate-800">Assessment Complete!</h2>
+                <div class="chart-container">
+                    <canvas id="resultsChart"></canvas>
+                </div>
+                <div id="result-summary" class="text-xl font-bold"></div>
+                <button onclick="resetQuiz()" class="bg-slate-200 text-slate-800 px-8 py-3 rounded-xl font-bold hover:bg-slate-300">Try Again</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // ============================================================
+        // DATA — 25 flashcards drawn from Class 7 (Lessons 1 to 4)
+        // ============================================================
+        const flashcards = [
+            {front: "An intrusion", back: "Any action that violates the security policy of a system or a network — an outsider reading data they were never allowed to read, an employee using a right they should not have, malware contacting its operator, or an attempt at any of these. The word covers attempts as well as successes."},
+            {front: "Intrusion detection", back: "The process of watching the events that happen in a computer system or on a network, and analysing those events for signs of an intrusion. Described by NIST in Special Publication 800-94."},
+            {front: "IDS (Intrusion Detection System)", back: "The software or appliance that automates intrusion detection. It observes traffic or host activity, compares what it sees with its detection logic, and on a match writes an alert. It does NOT change the traffic: passive and out-of-band."},
+            {front: "IPS (Intrusion Prevention System)", back: "Everything an IDS contains plus a response. On a match it can drop the packet, reset the connection, or block the source address. To act before delivery it must be inline — physically or logically in the path of the traffic."},
+            {front: "IDPS", back: "NIST's general term (Intrusion Detection and Prevention System) for a product that can run in either mode. Snort and Suricata, the two free tools of LAB_04, are IDPS."},
+            {front: "True positive / false positive / false negative / true negative", back: "TP = alert for a real attack · FP = alert for an event that was not an attack · FN = an attack that produced no alert · TN = normal traffic that correctly produced nothing."},
+            {front: "Tuning", back: "The work of reducing false positives without creating false negatives. It is the reason a new sensor is almost always started in IDS mode: while out-of-band, a false positive costs an analyst minutes; once inline, it blocks business traffic."},
+            {front: "Signature-based detection", back: "Compares the observed data with a list of known patterns called signatures or rules (e.g. \"the text ' OR 1=1 appears in a request\"). Precise for known attacks; blind to any attack for which no rule exists yet."},
+            {front: "Anomaly-based detection", back: "First builds a baseline — a statistical description of normal activity (bytes/hour, connections per host, protocols seen) — then alerts when activity deviates strongly from it. Can find unknown attacks; needs a learning period and produces false positives until the baseline is updated."},
+            {front: "Stateful protocol analysis", back: "Compares the observed behaviour of a protocol with the definition of how that protocol should behave — a web request 40,000 characters long, or file-transfer commands sent before the login step. The engine must track the state of each session."},
+            {front: "Fail-open vs fail-closed", back: "What an inline device does when it fails. Fail-open keeps traffic flowing without inspection (availability first). Fail-closed cuts the link until the device is back (security first)."},
+            {front: "The four IDPS components (NIST SP 800-94)", back: "Sensor or agent (observes traffic / host activity) · management server (receives, stores, correlates events) · database server (holds events and alerts for searching) · console (the analyst's interface for reading alerts and tuning rules)."},
+            {front: "Promiscuous mode", back: "A network card setting that hands every frame on the wire to the sensor, instead of only the frames addressed to its own hardware address. Without it the sensor sees only its own traffic. In VirtualBox: adapter → Advanced → Promiscuous Mode: Allow All."},
+            {front: "The six stages of a network sensor", back: "1 Capture (promiscuous mode) · 2 Decode (Ethernet → IP → TCP/UDP → application) · 3 Normalisation (IP defrag, TCP stream reassembly) · 4 Detection engine (rules, anomaly, protocol checks) · 5 Output (fast.log, eve.json) · 6 Response — IPS only (pass / drop / reject)."},
+            {front: "HIDS / HIPS (Host-based)", back: "An agent installed on one endpoint that does not decode packets; it reads what the operating system already knows. A HIPS is the same agent with the right to block a process, a connection or a file operation."},
+            {front: "File integrity monitoring (FIM)", back: "Takes a baseline — a list of watched files with a cryptographic hash of each (usually SHA-256) — then recomputes the hashes at intervals and reports every file that was modified, added or deleted. A single changed byte changes the digest."},
+            {front: "The four functions of a host agent", back: "File integrity monitoring (FIM) · log analysis (auth logs, Windows Security log, web server logs) · process and registry monitoring · rootkit detection (comparing what the OS reports with what the agent finds by other means)."},
+            {front: "Main limitation of a network sensor", back: "It cannot decode an encrypted payload: for a TLS connection it sees addresses, ports, sizes, timing and the server name, but not the request inside. And it only sees the traffic of the segment it is attached to."},
+            {front: "Main limitation of a host agent", back: "It covers only its own host, consumes memory and processor time on every protected system, and an intruder who becomes administrator of the host can stop it. Its baseline must therefore be stored elsewhere."},
+            {front: "Mirror port (SPAN)", back: "The switch is configured to copy the frames of one or more ports (or a whole VLAN) to the port where the sensor is connected. No extra hardware and configured in minutes, but under load the switch drops mirrored frames first, so the sensor may miss packets."},
+            {front: "Network tap (TAP)", back: "A small device inserted in the cable that passes the traffic through and sends a full copy of both directions to the sensor. Complete copy including errors, and a passive tap keeps passing traffic even without power — but it costs money and inserting it interrupts the link briefly."},
+            {front: "Inline", back: "The sensor has two interfaces and bridges them; every packet enters one side, is inspected, and leaves the other. The only technique that allows blocking (IPS). Adds delay to every packet, and a device failure forces the fail-open / fail-closed decision."},
+            {front: "HOME_NET and EXTERNAL_NET", back: "The variables that tell Snort and Suricata which address ranges are 'ours' and which are everything else. Rules are direction-aware (alert http $EXTERNAL_NET any -> $HOME_NET any), so a wrong HOME_NET means inbound-attack rules never match — or fire on your own outbound traffic."},
+            {front: "CIS Controls v8.1 in numbers", back: "18 Controls · 153 Safeguards · 3 Implementation Groups (IG1 = 56 safeguards, 'essential cyber hygiene'). Published June 2024. Each safeguard carries one NIST CSF 2.0 function: Govern, Identify, Protect, Detect, Respond or Recover."},
+            {front: "Control 13 — Network Monitoring and Defense", back: "13.1 Centralize Security Event Alerting · 13.2 Host-Based IDS · 13.3 Network IDS · 13.4 Traffic Filtering Between Segments · 13.5 Remote Asset Access Control · 13.6 Network Traffic Flow Logs · 13.7 Host-Based IPS · 13.8 Network IPS · 13.9 Port-Level Access Control · 13.10 Application Layer Filtering · 13.11 Tune Alerting Thresholds."}
+        ];
+
+        // ============================================================
+        // DATA — 10 practice questions drawn from Class 7
+        // ============================================================
+        const quizQuestions = [
+            {
+                question: "Which action is possible ONLY for a sensor running in prevention (IPS) mode?",
+                hint: "Think about what requires the sensor to sit in the path of the packet.",
+                options: [
+                    {text: "Write an alert line with a time stamp", isCorrect: false, rationale: "Both modes write alerts — the alert is the output stage of every IDPS."},
+                    {text: "Drop the packet before it reaches its destination", isCorrect: true, rationale: "Only an inline device can discard a packet. An out-of-band IDS works on a copy that has already been delivered."},
+                    {text: "Record a copy of the packet for later analysis", isCorrect: false, rationale: "Recording the packet is an output option available in both modes."},
+                    {text: "Compare the payload with a list of signatures", isCorrect: false, rationale: "Signature matching is the detection stage, and it is identical in both modes."}
+                ]
+            },
+            {
+                question: "A sensor receives its traffic from a mirror port on the DMZ switch. How is it positioned?",
+                hint: "A mirror port sends a copy; the original keeps going to its destination.",
+                options: [
+                    {text: "Inline, in the path of the traffic", isCorrect: false, rationale: "An inline device has the traffic pass through it; a mirror port delivers a copy on a separate port."},
+                    {text: "Out-of-band (passive)", isCorrect: true, rationale: "The sensor sees a copy of the frames while the originals continue to their destination. It cannot block anything."},
+                    {text: "On the endpoint, as a host agent", isCorrect: false, rationale: "A host agent runs on the protected computer and reads its files and logs — not a switch port."},
+                    {text: "In the cloud provider's traffic mirroring service", isCorrect: false, rationale: "Cloud mirroring is the cloud equivalent of a mirror port, but the question describes a physical switch."}
+                ]
+            },
+            {
+                question: "The nightly backup of Laurentide Outfitters inc. produces an 'unusual volume' alert every night at 2 am. What is this alert?",
+                hint: "Was there actually an attack?",
+                options: [
+                    {text: "A true positive", isCorrect: false, rationale: "A true positive is an alert for a real attack; a backup is legitimate activity."},
+                    {text: "A false positive", isCorrect: true, rationale: "An alert for an event that was not an attack. Tuning — or updating the anomaly baseline — removes it."},
+                    {text: "A false negative", isCorrect: false, rationale: "A false negative is an attack that produced no alert. Here there is an alert and no attack."},
+                    {text: "A true negative", isCorrect: false, rationale: "A true negative is normal traffic that correctly produced nothing. Here something was produced."}
+                ]
+            },
+            {
+                question: "Which detection method needs a learning period before its alerts become useful?",
+                hint: "Which method must first know what 'normal' looks like?",
+                options: [
+                    {text: "Signature-based detection", isCorrect: false, rationale: "Signatures work from the first packet; they need rules, not a learning period."},
+                    {text: "Anomaly-based detection", isCorrect: true, rationale: "It builds a statistical baseline of normal activity first, then alerts on strong deviations from it."},
+                    {text: "Stateful protocol analysis", isCorrect: false, rationale: "It compares behaviour with the protocol definition, which is known in advance."},
+                    {text: "File integrity monitoring", isCorrect: false, rationale: "It needs one baseline snapshot of hashes — not a learning period of traffic statistics."}
+                ]
+            },
+            {
+                question: "Which of these events is visible to a host agent but NOT to a network sensor?",
+                hint: "Which one produces no packet at all?",
+                options: [
+                    {text: "A scan of the web server from the Internet", isCorrect: false, rationale: "A scan is network traffic that crosses the DMZ link; the network sensor sees it."},
+                    {text: "An edit of a configuration file on the server, made at its console", isCorrect: true, rationale: "A local edit produces no network traffic. Only file integrity monitoring on the host detects it."},
+                    {text: "A connection from the user zone to the file server", isCorrect: false, rationale: "The connection crosses the server-zone link; a sensor on that link sees it."},
+                    {text: "A large upload from a workstation to the Internet", isCorrect: false, rationale: "The upload crosses the user-zone and WAN links; a sensor sees the volume even if the content is encrypted."}
+                ]
+            },
+            {
+                question: "In the network sensor pipeline, reading the Ethernet, IP and TCP headers layer by layer is called:",
+                hint: "It comes right after capture and right before normalisation.",
+                options: [
+                    {text: "Capture", isCorrect: false, rationale: "Capture is receiving the frames from the interface in promiscuous mode."},
+                    {text: "Decoding", isCorrect: true, rationale: "Decoding interprets each header in turn so the later stages know the addresses, ports and protocol."},
+                    {text: "Normalisation", isCorrect: false, rationale: "Normalisation reassembles fragments and streams, and it happens after decoding."},
+                    {text: "Output", isCorrect: false, rationale: "Output writes the alerts and logs at the very end of the pipeline."}
+                ]
+            },
+            {
+                question: "A sensor is attached OUTSIDE the firewall (position P1). What does it see?",
+                hint: "The firewall has not yet done anything to that traffic.",
+                options: [
+                    {text: "Only the traffic the firewall allowed", isCorrect: false, rationale: "That is what a sensor just INSIDE the firewall sees."},
+                    {text: "Everything the Internet sends, including what the firewall will block", isCorrect: true, rationale: "Outside the firewall no filtering has happened yet — which is exactly why this position is too noisy for a person to read."},
+                    {text: "Only the traffic of the DMZ", isCorrect: false, rationale: "DMZ traffic is seen on the DMZ link, position P2."},
+                    {text: "The traffic between users and servers", isCorrect: false, rationale: "That traffic never reaches the WAN link; it stays inside the firewall."}
+                ]
+            },
+            {
+                question: "To block an attack in real time, the sensor must be connected:",
+                hint: "A copy cannot be stopped.",
+                options: [
+                    {text: "To a mirror port", isCorrect: false, rationale: "A mirror port delivers a copy; the original has already passed."},
+                    {text: "To a network tap", isCorrect: false, rationale: "A tap also delivers a copy; it is out-of-band."},
+                    {text: "Inline, bridging two interfaces", isCorrect: true, rationale: "Only a device in the path can hold a packet until the verdict and discard it."},
+                    {text: "To the management network", isCorrect: false, rationale: "The management network carries the console and updates — not the inspected traffic."}
+                ]
+            },
+            {
+                question: "HOME_NET was left at the installation default, which does not match the lab. What happens?",
+                hint: "Rules have a direction: from external to home.",
+                options: [
+                    {text: "The sensor refuses to start", isCorrect: false, rationale: "The sensor starts fine. A wrong HOME_NET is a logic error, not a syntax error."},
+                    {text: "Direction-aware rules never match, or fire on your own outbound traffic", isCorrect: true, rationale: "A rule written as 'external → home' depends on HOME_NET being right. With a wrong value the rule misfires or stays silent."},
+                    {text: "The sensor drops all packets", isCorrect: false, rationale: "An IDS never drops packets, and HOME_NET does not control forwarding."},
+                    {text: "The rule download fails", isCorrect: false, rationale: "The rule download depends on Internet access, not on HOME_NET."}
+                ]
+            },
+            {
+                question: "Suricata running in alert-only mode on the DMZ link satisfies which CIS Control 13 safeguard?",
+                hint: "Network... detection... not prevention.",
+                options: [
+                    {text: "13.2 Deploy a Host-Based Intrusion Detection Solution", isCorrect: false, rationale: "A host-based solution is an agent on the endpoint; Suricata on a link is network-based."},
+                    {text: "13.3 Deploy a Network Intrusion Detection Solution", isCorrect: true, rationale: "A network sensor in detection mode is exactly this safeguard. Adding inline drop mode later would satisfy 13.8."},
+                    {text: "13.8 Deploy a Network Intrusion Prevention Solution", isCorrect: false, rationale: "Prevention requires inline operation with drop enabled; alert-only mode does not satisfy it."},
+                    {text: "8.11 Conduct Audit Log Reviews", isCorrect: false, rationale: "Reviewing logs is a human activity that the sensor alone does not perform."}
+                ]
+            }
+        ];
+
+        // ============================================================
+        // STATE
+        // ============================================================
+        let currentCardIndex = 0;
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let resultsChart = null;
+
+        // ============================================================
+        // NAVIGATION
+        // ============================================================
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('bg-white', 'text-indigo-600', 'shadow-sm', 'active');
+                b.classList.add('text-slate-600');
+            });
+
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.classList.add('bg-white', 'text-indigo-600', 'shadow-sm', 'active');
+            activeBtn.classList.remove('text-slate-600');
+        }
+
+        // ============================================================
+        // FLASHCARD LOGIC
+        // ============================================================
+        function updateCard() {
+            const card = flashcards[currentCardIndex];
+            const inner = document.getElementById('flashcard-inner');
+            inner.classList.remove('flipped');
+
+            setTimeout(() => {
+                document.getElementById('card-front-text').innerText = card.front;
+                document.getElementById('card-back-text').innerText = card.back;
+                document.getElementById('card-counter').innerText = `${currentCardIndex + 1} / ${flashcards.length}`;
+                document.getElementById('card-progress').style.width = `${((currentCardIndex + 1) / flashcards.length) * 100}%`;
+            }, 150);
+        }
+
+        function nextCard() {
+            currentCardIndex = (currentCardIndex + 1) % flashcards.length;
+            updateCard();
+        }
+
+        function prevCard() {
+            currentCardIndex = (currentCardIndex - 1 + flashcards.length) % flashcards.length;
+            updateCard();
+        }
+
+        // ============================================================
+        // QUIZ LOGIC
+        // ============================================================
+        function startQuiz() {
+            document.getElementById('quiz-intro').classList.add('hidden');
+            document.getElementById('quiz-active').classList.remove('hidden');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = quizQuestions[currentQuizIndex];
+            document.getElementById('quiz-question').innerText = q.question;
+            document.getElementById('quiz-progress-text').innerText = `Question ${currentQuizIndex + 1} of ${quizQuestions.length}`;
+            document.getElementById('quiz-hint').innerText = q.hint;
+            document.getElementById('quiz-hint').classList.add('hidden');
+            document.getElementById('hint-toggle-btn').innerText = "Need a hint? 💡";
+
+            const optionsBox = document.getElementById('quiz-options');
+            optionsBox.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border-2 border-slate-100 hover:border-indigo-300 hover:bg-indigo-50 transition-all text-slate-700 font-medium quiz-opt-btn";
+                btn.innerText = opt.text;
+                btn.onclick = () => selectOption(idx);
+                optionsBox.appendChild(btn);
+            });
+
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('next-q-btn').classList.add('hidden');
+        }
+
+        function selectOption(idx) {
+            const q = quizQuestions[currentQuizIndex];
+            const selected = q.options[idx];
+            const feedbackBox = document.getElementById('quiz-feedback');
+
+            // Disable buttons
+            document.querySelectorAll('.quiz-opt-btn').forEach(b => b.disabled = true);
+
+            feedbackBox.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-800', 'border-emerald-200', 'bg-rose-50', 'text-rose-800', 'border-rose-200');
+
+            if (selected.isCorrect) {
+                quizScore++;
+                feedbackBox.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+                feedbackBox.innerHTML = `<strong>Correct!</strong> ${selected.rationale}`;
+            } else {
+                feedbackBox.classList.add('bg-rose-50', 'text-rose-800', 'border-rose-200');
+                feedbackBox.innerHTML = `<strong>Incorrect.</strong> ${selected.rationale}`;
+            }
+
+            document.getElementById('quiz-score-live').innerText = `Score: ${quizScore}`;
+            document.getElementById('next-q-btn').classList.remove('hidden');
+        }
+
+        function toggleHint() {
+            const hint = document.getElementById('quiz-hint');
+            const btn = document.getElementById('hint-toggle-btn');
+            if (hint.classList.contains('hidden')) {
+                hint.classList.remove('hidden');
+                btn.innerText = "Hide hint";
+            } else {
+                hint.classList.add('hidden');
+                btn.innerText = "Need a hint? 💡";
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuizIndex < quizQuestions.length - 1) {
+                currentQuizIndex++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-active').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+
+            document.getElementById('result-summary').innerText = `You scored ${quizScore} out of ${quizQuestions.length}`;
+
+            const ctx = document.getElementById('resultsChart').getContext('2d');
+            if (resultsChart) resultsChart.destroy();
+
+            resultsChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Correct', 'Incorrect'],
+                    datasets: [{
+                        data: [quizScore, quizQuestions.length - quizScore],
+                        backgroundColor: ['#10b981', '#f43f5e'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        function resetQuiz() {
+            quizScore = 0;
+            currentQuizIndex = 0;
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-intro').classList.remove('hidden');
+            document.getElementById('quiz-score-live').innerText = `Score: 0`;
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        updateCard();
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-6 mt-8">
+        <div class="container mx-auto text-center text-sm">
+            <p style="display:flex; justify-content:center; align-items:center; gap:8px; margin:0;">
+				<img src="cyber_soho.png"
+					 alt="Cyber Soho"
+					 style="height:50px;">
+				<span>Educational Hub &copy; 2026 | From the Industry to the Classroom — Building the IT’s Future, Today and Together !
+				<br>ALL Rights Reserverd</br>
+			</p>
+        </div>
+    </footer>
+
+</body>
+</html>
